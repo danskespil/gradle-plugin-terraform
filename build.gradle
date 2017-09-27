@@ -3,12 +3,16 @@ buildscript {
         jcenter()
         maven { url "${artifactory_contextUrl}" + "/integration" }
     }
+    dependencies {
+        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.5.2')
+    }
 }
 
 plugins {
     // ajoberstar working example: https://github.com/katharsis-project/katharsis-vertx/blob/master/build.gradle
     id 'org.ajoberstar.grgit' version '1.5.1'
     id 'org.ajoberstar.release-opinion' version '1.5.1'
+    //id "com.jfrog.artifactory" version "4.5.2"
 }
 
 group 'dk.danskespil.gradle.plugins'
@@ -34,10 +38,10 @@ release {
 //// END This block has to be after "apply plugin: 'maven'"
 
 apply plugin: 'groovy'
+apply from: "${projectDir}/gradle/artifactory.gradle"
 // Allow tests to do a build with gradlerunner WITH the code of the plugin itself.
 // Significantly simplifies the test-writing task.
 apply plugin: 'java-gradle-plugin'
-
 gradlePlugin {
     // https://docs.gradle.org/current/javadoc/org/gradle/plugin/devel/GradlePluginDevelopmentExtension.html
     plugins {

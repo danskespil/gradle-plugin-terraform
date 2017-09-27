@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.terraform.dk.danskespil.gradle.plugins.dk.danskespil.gradle.plugins.helpers
+package dk.danskespil.gradle.plugins.helpers
 
 /**
  * Helper to make it easier to create nested filestructures with TemporaryFolder

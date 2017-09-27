@@ -1,10 +1,9 @@
 package dk.danskespil.gradle.plugins.terraform
 
-import dk.danskespil.gradle.plugins.terraform.dk.danskespil.gradle.plugins.dk.danskespil.gradle.plugins.helpers.DSSpecification
+import dk.danskespil.gradle.plugins.helpers.DSSpecification
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.TaskOutcome
-import spock.lang.Ignore
 import spock.lang.Unroll
 
 class PlanTest extends DSSpecification {
@@ -96,7 +95,8 @@ class PlanTest extends DSSpecification {
 
     }
 
-    def "build is performed again if inputfile is changed after first build"() {
+    @Unroll
+    def "build is performed again if file '#inputfile' is changed after first build"() {
         given:
         buildFile << """
           plugins { 
@@ -107,7 +107,7 @@ class PlanTest extends DSSpecification {
         """
 
         // Simulate input file
-        File simulatedInputFile = createNewPath('terraform.tf')
+        File simulatedInputFile = createNewPath(inputfile)
         simulatedInputFile << "simulated content"
 
         when:
@@ -124,6 +124,9 @@ class PlanTest extends DSSpecification {
         build2.task(':cut').outcome == TaskOutcome.UP_TO_DATE
         build3.task(':cut').outcome == TaskOutcome.SUCCESS
         build4.task(':cut').outcome == TaskOutcome.UP_TO_DATE
+
+        where:
+        inputfile << ['terraform.tf']
     }
 
     @Unroll
@@ -141,6 +144,7 @@ class PlanTest extends DSSpecification {
         File simulatedInputFile = createNewPath('terraform.tf')
         simulatedInputFile << "simulated content"
         File simulatedOutputFile = createNewPath('plan-output')
+        simulatedOutputFile.createNewFile()
         simulatedOutputFile << "simulated content"
 
         when:
@@ -152,7 +156,7 @@ class PlanTest extends DSSpecification {
 
         def build3 = buildWithTasks('cut')
 
-        //def build4 = buildWithTasks('cut')
+        def build4 = buildWithTasks('cut')
 
         then:
         simulatedOutputFile.exists()
@@ -160,7 +164,7 @@ class PlanTest extends DSSpecification {
         simulatedOutputFile.text.contains('new content')
         build2.task(':cut').outcome == TaskOutcome.UP_TO_DATE
         build3.task(':cut').outcome == TaskOutcome.SUCCESS
-        //build4.task(':cut').outcome == TaskOutcome.UP_TO_DATE
+        build4.task(':cut').outcome == TaskOutcome.UP_TO_DATE
 
         where:
         outputfile << ['plan-output']

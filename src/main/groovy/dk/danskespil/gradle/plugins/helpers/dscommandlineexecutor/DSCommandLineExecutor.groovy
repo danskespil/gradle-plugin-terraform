@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.terraform.dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor
+package dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor
 
 import org.gradle.api.Project
 import org.gradle.process.ExecSpec

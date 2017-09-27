@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform
 
-import dk.danskespil.gradle.plugins.terraform.dk.danskespil.gradle.plugins.dk.danskespil.gradle.plugins.helpers.DSSpecification
+import dk.danskespil.gradle.plugins.helpers.DSSpecification
 
 class TerraformPluginTest extends DSSpecification {
     def "I can apply the plugin"() {

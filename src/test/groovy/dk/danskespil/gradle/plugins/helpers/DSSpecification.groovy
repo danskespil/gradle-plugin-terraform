@@ -1,6 +1,6 @@
-package dk.danskespil.gradle.plugins.terraform.dk.danskespil.gradle.plugins.dk.danskespil.gradle.plugins.helpers
+package dk.danskespil.gradle.plugins.helpers
 
-import dk.danskespil.gradle.plugins.terraform.dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor.DSCommandLineExecutorFactory
+import dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor.DSCommandLineExecutorFactory
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification

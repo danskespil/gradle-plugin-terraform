@@ -96,8 +96,38 @@ class PlanTest extends DSSpecification {
 
     }
 
-    @Ignore
-    def "build is performed again if plan-output file is deleted by user"() {
+    def "build is performed again if inputfile is changed after first build"() {
+        given:
+        buildFile << """
+          plugins { 
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+          
+          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan)
+        """
+
+        // Simulate input file
+        File simulatedInputFile = createNewPath('terraform.tf')
+        simulatedInputFile << "simulated content"
+
+        when:
+        def build1 = buildWithTasks('cut')
+
+        def build2 = buildWithTasks('cut')
+        simulatedInputFile << 'new content'
+
+        def build3 = buildWithTasks('cut')
+        def build4 = buildWithTasks('cut')
+
+        then:
+        build1.task(':cut').outcome == TaskOutcome.SUCCESS
+        build2.task(':cut').outcome == TaskOutcome.UP_TO_DATE
+        build3.task(':cut').outcome == TaskOutcome.SUCCESS
+        build4.task(':cut').outcome == TaskOutcome.UP_TO_DATE
+    }
+
+    @Unroll
+    def "build is performed again if file '#outputfile'  is deleted by user after first build"() {
         given:
         buildFile << """
           plugins { 
@@ -131,5 +161,8 @@ class PlanTest extends DSSpecification {
         build2.task(':cut').outcome == TaskOutcome.UP_TO_DATE
         build3.task(':cut').outcome == TaskOutcome.SUCCESS
         //build4.task(':cut').outcome == TaskOutcome.UP_TO_DATE
+
+        where:
+        outputfile << ['plan-output']
     }
 }

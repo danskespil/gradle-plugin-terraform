@@ -65,8 +65,3 @@ test {
         events "STANDARD_OUT", "STANDARD_ERROR"
     }
 }
-
-task wrapper(type: Wrapper) {
-  gradleVersion="4.1"
-}
-

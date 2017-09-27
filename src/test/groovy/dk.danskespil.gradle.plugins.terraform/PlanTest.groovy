@@ -96,6 +96,7 @@ class PlanTest extends DSSpecification {
 
     }
 
+    @Ignore
     def "build is performed again if plan-output file is deleted by user"() {
         given:
         buildFile << """
@@ -116,7 +117,7 @@ class PlanTest extends DSSpecification {
         def build1 = buildWithTasks('cut')
 
         def build2 = buildWithTasks('cut')
-        simulatedOutputFile << "simulated content"
+        simulatedOutputFile << 'new content'
         //simulatedOutputFile.delete()
 
         def build3 = buildWithTasks('cut')
@@ -126,6 +127,7 @@ class PlanTest extends DSSpecification {
         then:
         simulatedOutputFile.exists()
         build1.task(':cut').outcome == TaskOutcome.SUCCESS
+        simulatedOutputFile.text.contains('new content')
         build2.task(':cut').outcome == TaskOutcome.UP_TO_DATE
         build3.task(':cut').outcome == TaskOutcome.SUCCESS
         //build4.task(':cut').outcome == TaskOutcome.UP_TO_DATE

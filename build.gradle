@@ -1,0 +1,72 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "${artifactory_contextUrl}" + "/integration" }
+    }
+}
+
+plugins {
+    // ajoberstar working example: https://github.com/katharsis-project/katharsis-vertx/blob/master/build.gradle
+    id 'org.ajoberstar.grgit' version '1.5.1'
+    id 'org.ajoberstar.release-opinion' version '1.5.1'
+}
+
+group 'dk.danskespil.gradle.plugins'
+
+apply plugin: 'java'
+
+//// START This block has to be after "apply plugin: 'maven'"
+// https://github.com/ajoberstar/gradle-git/wiki/Release%20Plugins
+// to deploy as maven artifact
+apply plugin: 'maven'
+
+import org.ajoberstar.gradle.git.release.opinion.Strategies
+
+release {
+    grgit = org.ajoberstar.grgit.Grgit.open()
+    defaultVersionStrategy = Strategies.SNAPSHOT
+    versionStrategy Strategies.SNAPSHOT
+    tagStrategy {
+        prefixNameWithV = false // defaults to true
+        generateMessage = { version -> "My new version $version.version" }
+    }
+}
+//// END This block has to be after "apply plugin: 'maven'"
+
+apply plugin: 'groovy'
+// Allow tests to do a build with gradlerunner WITH the code of the plugin itself.
+// Significantly simplifies the test-writing task.
+apply plugin: 'java-gradle-plugin'
+
+gradlePlugin {
+    // https://docs.gradle.org/current/javadoc/org/gradle/plugin/devel/GradlePluginDevelopmentExtension.html
+    plugins {
+        "terraform" {
+            id = "dk.danskespil.gradle.plugins.terraform"
+            implementationClass = 'dk.danskespil.gradle.plugins.terraform.TerraformPlugin'
+        }
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
+        exclude module: 'groovy-all'
+    }
+    testCompile group: 'commons-io', name: 'commons-io', version: '2.5'
+}
+
+test {
+    testLogging {
+        events "STANDARD_OUT", "STANDARD_ERROR"
+    }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion="4.1"
+}
+

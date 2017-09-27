@@ -105,16 +105,18 @@ class PlanTest extends DSSpecification {
           
           task cut(type: dk.danskespil.gradle.plugins.terraform.Plan)
         """
-        when:
+
         // Simulate input file
-        createNewPath('terraform.tf')
+        File simulatedInputFile = createNewPath('terraform.tf')
+        simulatedInputFile << "simulated content"
         File simulatedOutputFile = createNewPath('plan-output')
-        simulatedOutputFile << "simulate content"
-        //File f = createNewPath('plan-output')
+        simulatedOutputFile << "simulated content"
+
+        when:
         def build1 = buildWithTasks('cut')
 
         def build2 = buildWithTasks('cut')
-        simulatedOutputFile << "simulate content"
+        simulatedOutputFile << "simulated content"
         //simulatedOutputFile.delete()
 
         def build3 = buildWithTasks('cut')

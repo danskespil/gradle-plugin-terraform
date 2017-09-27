@@ -8,7 +8,7 @@ artifactory {
     contextUrl = "${artifactory_contextUrl}"
     publish {
         repository {
-            repoKey = "${artifactory_plugins_repo}" // The Artifactory repository key to publish to
+            repoKey = "${artifactory_libs_repo}" // The Artifactory repository key to publish to
             username = "${artifactory_user}" // The publisher user name
             password = "${artifactory_password}" // The publisher password
         }

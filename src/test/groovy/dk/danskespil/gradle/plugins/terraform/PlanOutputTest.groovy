@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.terraform.wip
+package dk.danskespil.gradle.plugins.terraform
 
 import dk.danskespil.gradle.plugins.helpers.DSSpecification
 import org.gradle.testkit.runner.TaskOutcome

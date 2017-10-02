@@ -8,10 +8,6 @@ class DSCommandLineTestExecutor extends AbstractDSCommandLineExecutor {
         super(project)
     }
 
-    def execute(String command) {
-        println command
-    }
-
     def executeExecSpec(Plan task, Closure e) {
         task.commandLine.prefix 'echo'
         task.project.exec e

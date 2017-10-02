@@ -121,7 +121,6 @@ class PlanTest extends DSSpecification {
           }
           
           task cut(type: dk.danskespil.gradle.plugins.terraform.Plan)
-          
         """
 
         // Simulate input file
@@ -158,7 +157,7 @@ class PlanTest extends DSSpecification {
           task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
             tfNativeArgOut = file('plan-output.bin')
             doLast {
-              // Since terraform is not executed, I am faking creation of the outputfile   
+              // Since terraform is not executed during test, I am faking creation of the outputfile   
               file('plan-output.bin').createNewFile()
             }
           }

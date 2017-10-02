@@ -1,12 +1,12 @@
 package dk.danskespil.gradle.plugins.terraform
 
 import dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor.DSCommandLineExecutorFactory
-import org.gradle.api.DefaultTask
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.*
 import org.gradle.process.ExecSpec
 
-class Plan extends DefaultTask {
+class Plan extends TerraformTask
+{
     @InputFiles
     FileCollection terraformFiles = project.fileTree('.').include('*.tf')
     @InputFiles
@@ -19,8 +19,6 @@ class Plan extends DefaultTask {
     @Optional
     @OutputFile
     File outAsText
-    @Internal
-    CommandLine commandLine = new CommandLine()
 
     @TaskAction
     action() {

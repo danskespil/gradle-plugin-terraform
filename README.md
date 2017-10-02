@@ -28,3 +28,16 @@ This README would normally document whatever steps are necessary to get your app
 * Jesper Wermuth wermuth@lundogbendsen.dk
 * Mads Brouer, Danske
  spil
+ 
+# Versions
+
+## 0.0.2-SNAPSHOT
+* make it easy to distinguish between flags and options provided by terraform and 
+those provided by the plugin. Example --out is provided by terraform, and it saves the output of
+plan to a binary file for later use. However we want to keep the textual output in a file
+as well, so a plugin-specific flag --outAsText is provided. To make it easy to distinguish,
+terraform _args_ (such as --out=aFileName.bin) are prefixed with tfNativeArg and becomes --tfNativeArgOut.
+Yes, its verbose. Yes its easier to figure out what it means without having to read documentation.
+
+## 0.0.1
+* With focus on "terraform plan" and the corresponding custom task Plan a test environment is set up

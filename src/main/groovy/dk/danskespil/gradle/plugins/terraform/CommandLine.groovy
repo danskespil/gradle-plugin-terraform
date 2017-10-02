@@ -7,6 +7,12 @@ class CommandLine implements Iterable<String> {
         return commandLine.iterator()
     }
 
+    boolean addToEnd(String... elements) {
+        elements.each { String s ->
+            addToEnd(s)
+        }
+    }
+
     boolean addToEnd(String element) {
         return commandLine.add(element)
     }

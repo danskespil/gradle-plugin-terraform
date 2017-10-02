@@ -24,8 +24,7 @@ class Plan extends DefaultTask {
 
     @TaskAction
     action() {
-        commandLine.addToEnd('terraform')
-        commandLine.addToEnd('plan')
+        commandLine.addToEnd('terraform', 'plan')
 
         if (tfNativeArgOut) {
             commandLine.addToEnd("out=${tfNativeArgOut.name}")

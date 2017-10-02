@@ -84,4 +84,28 @@ class PlanOutputTest extends DSSpecification {
         new File(testProjectDir.root.getAbsolutePath() + "/plan-output").exists()
         new File(testProjectDir.root.getAbsolutePath() + "/plan-output").text.contains('terraform plan')
     }
+
+    def "only when file with textual output is deleted, its rebuild"() {
+        given:
+        buildFile << """
+          plugins {
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+
+          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+             outAsText=file('plan-output')
+          }
+        """
+
+        when:
+        def build1 = buildWithTasks('cut')
+        def build2 = buildWithTasks('cut')
+        new File(testProjectDir.root.getAbsolutePath() + '/plan-output').delete()
+        def build3 = buildWithTasks('cut')
+
+        then:
+        build1.task(':cut').outcome == TaskOutcome.SUCCESS
+        build2.task(':cut').outcome == TaskOutcome.UP_TO_DATE
+        build3.task(':cut').outcome == TaskOutcome.SUCCESS
+    }
 }

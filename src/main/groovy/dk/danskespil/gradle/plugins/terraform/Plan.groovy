@@ -11,10 +11,10 @@ class Plan extends DefaultTask {
     FileCollection terraformFiles = project.fileTree('.').include('*.tf')
     @InputFiles
     FileCollection templateFiles = project.fileTree('.').include('*.tpl')
-    // -out=path           Write a plan file to the given path. This can be used as input to the "apply" command.
     @Optional
     @OutputFile
-    File out
+    // -out=path           Write a plan file to the given path. This can be used as input to the "apply" command.
+    File tfNativeArgOut
     @Optional
     @OutputFile
     File outAsText
@@ -25,8 +25,8 @@ class Plan extends DefaultTask {
     action() {
         commandLine.addToEnd('terraform')
         commandLine.addToEnd('plan')
-        if (out) {
-            commandLine.addToEnd("out=${out.name}")
+        if (tfNativeArgOut) {
+            commandLine.addToEnd("out=${tfNativeArgOut.name}")
         }
         //DSCommandLineExecutorFactory.createExecutor(project).execute("terraform plan ${outAsParam()}")
         new DSCommandLineTestExecutor(project).executeExecSpec(this, { ExecSpec e ->

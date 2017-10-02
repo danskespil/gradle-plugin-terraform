@@ -13,8 +13,11 @@ class TerraformPlugin implements Plugin<Project> {
 
     private applyJavaPluginSoWeHaveDanskeSpilDefaultTasksAtHand(Project project) {
         project.apply(plugin: JavaPlugin)
+
+        Get tfGet = project.task(type:Get, 'tfGet')
         project.task(type:Plan, 'tfPlan') {
-            tfNativeArgOut=project.file('plan-output.bin')
+            inputs.files tfGet.outputs.files
+            tfNativeArgOut = project.file('plan-output.bin')
         }
     }
 }

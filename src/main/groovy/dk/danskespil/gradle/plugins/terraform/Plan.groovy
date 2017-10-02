@@ -25,7 +25,7 @@ class Plan extends TerraformTask
         commandLine.addToEnd('terraform', 'plan')
 
         if (tfNativeArgOut) {
-            commandLine.addToEnd("out=${tfNativeArgOut.name}")
+            commandLine.addToEnd("-out=${tfNativeArgOut.name}")
         }
         OutputStream echoOutputHereToo = new EchoOutputStream(new ByteArrayOutputStream(), System.out)
         if (outAsText) {

@@ -1,7 +1,6 @@
-package dk.danskespil.gradle.plugins.terraform.wip
+package dk.danskespil.gradle.plugins.terraform
 
 import dk.danskespil.gradle.plugins.helpers.DSSpecification
-import dk.danskespil.gradle.plugins.terraform.Plan
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.TaskOutcome

@@ -18,4 +18,8 @@ class Get extends TerraformTask {
             e.commandLine this.commandLine
         })
     }
+    @Override
+    String getDescription() {
+        return """wraps terraform get. When using the plugin, its called automatically when you call tfPlan"""
+    }
 }

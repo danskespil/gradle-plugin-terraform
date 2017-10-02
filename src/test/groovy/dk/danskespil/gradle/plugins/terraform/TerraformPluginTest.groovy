@@ -73,4 +73,25 @@ class TerraformPluginTest extends DSSpecification {
         plan
         plan.taskDependencies.getDependencies(plan).contains(init)
     }
+
+    @Unroll
+    def "Main task '#task' is described when running gradle tasks"() {
+        given:
+        buildFile << """
+          plugins { 
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+          
+        """
+
+        when:
+        def build = buildWithTasks('tasks')
+
+        then:
+        build.output.contains(task)
+
+        where:
+        task << ['tfPlan', 'tfGet', 'tfInit']
+    }
+
 }

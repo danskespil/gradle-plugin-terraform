@@ -40,4 +40,14 @@ class Plan extends TerraformTask
             })
         }
     }
+
+    @Override
+    String getDescription() {
+        return """wraps terraform plan. You can set -out='filename' with and get textual output into a file with outAsText
+    task(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+      tfNativeArgOut=file('output.bin')
+      outAsText=file('textversion.txt')
+    }
+    """
+    }
 }

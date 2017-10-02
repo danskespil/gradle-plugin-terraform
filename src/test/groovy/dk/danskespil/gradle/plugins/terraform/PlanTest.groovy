@@ -189,4 +189,5 @@ class PlanTest extends DSSpecification {
         where:
         outputfile << ['plan-output.bin']
     }
+
 }

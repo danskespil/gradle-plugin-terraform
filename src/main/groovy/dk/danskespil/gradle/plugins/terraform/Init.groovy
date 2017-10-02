@@ -27,4 +27,10 @@ class Init extends TerraformTask {
     private boolean aStateFileIsPresent() {
         return project.file('.terraform/terraform.tfstate').exists()
     }
+
+    @Override
+    String getDescription() {
+        return """Wraps terraform init. Will only execute if no .terraform/terraform.state file is present. Designed to initialize automatically in a fresh clone"""
+    }
+
 }

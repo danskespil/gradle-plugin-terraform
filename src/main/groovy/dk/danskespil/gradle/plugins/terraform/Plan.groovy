@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform
 
-import dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor.DSCommandLineTestExecutor
+import dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor.DSCommandLineExecutorFactory
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.*
@@ -16,9 +16,9 @@ class Plan extends DefaultTask {
     // From terraform --help plan
     // -out=path           Write a plan file to the given path. This can be used as input to the "apply" command.
     File tfNativeArgOut
-//    @Optional
-//    @OutputFile
-//    File outAsText
+    @Optional
+    @OutputFile
+    File outAsText
     @Internal
     CommandLine commandLine = new CommandLine()
 
@@ -26,12 +26,21 @@ class Plan extends DefaultTask {
     action() {
         commandLine.addToEnd('terraform')
         commandLine.addToEnd('plan')
+
         if (tfNativeArgOut) {
             commandLine.addToEnd("out=${tfNativeArgOut.name}")
         }
-        new DSCommandLineTestExecutor(project).executeExecSpec(this, { ExecSpec e ->
+        OutputStream echoOutputHereToo = new EchoOutputStream(new ByteArrayOutputStream(), System.out)
+        if (outAsText) {
+            outAsText.createNewFile()
+            echoOutputHereToo = new EchoOutputStream(echoOutputHereToo, new PrintStream(outAsText))
+        }
 
-            e.commandLine this.commandLine
-        })
+        echoOutputHereToo.withStream { os ->
+            DSCommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
+                e.commandLine this.commandLine
+                e.standardOutput = os
+            })
+        }
     }
 }

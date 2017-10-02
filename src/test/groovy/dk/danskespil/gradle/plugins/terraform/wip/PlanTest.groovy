@@ -25,26 +25,6 @@ class PlanTest extends DSSpecification {
 //        }
 //    }
 
-//    def "Can save output from plan in a text file"() {
-//        given:
-//        buildFile << """
-//          plugins {
-//              id 'dk.danskespil.gradle.plugins.terraform'
-//          }
-//
-//          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
-//             outAsText=file('plan-output')
-//          }
-//        """
-//
-//        when:
-//        def result = buildWithTasks('cut')
-//
-//        then:
-//        result
-//        result.task(':cut').outcome == TaskOutcome.SUCCESS
-//    }
-//
     def "Can write plan output to a file"() {
         given:
         buildFile << """

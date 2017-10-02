@@ -39,7 +39,7 @@ class TerraformPluginTest extends DSSpecification {
         result.task(":${task}").outcome == TaskOutcome.SUCCESS
 
         where:
-        task << ['tfPlan', 'tfGet']
+        task << ['tfPlan', 'tfGet', 'tfInit']
     }
 
     def "output from Get is input to Plan"() {

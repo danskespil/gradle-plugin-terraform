@@ -19,5 +19,7 @@ class TerraformPlugin implements Plugin<Project> {
             inputs.files tfGet.outputs.files
             tfNativeArgOut = project.file('plan-output.bin')
         }
+
+        Init tfInit = project.task(type:Init, 'tfInit')
     }
 }

@@ -9,13 +9,13 @@ import spock.lang.Unroll
 class PlanTest extends DSSpecification {
 // This is what we are coding against:
 //    task plan {
-//        inputs.files fileTree("$projectDir").include('*.tf')
-//        inputs.files fileTree("$projectDir").include('*.tpl')
-//        inputs.files get.outputs.files
-//        inputs.files remoteConfig.outputs.files
+//  Implemented      inputs.files fileTree("$projectDir").include('*.tf')
+//  Implemented      inputs.files fileTree("$projectDir").include('*.tpl')
+//  Implemented      inputs.files get.outputs.files
+//  Not Implemented      inputs.files remoteConfig.outputs.files
 //
-//        outputs.files file("${projectDir}/plan-output.bin")
-//        outputs.files file("${projectDir}/plan-output")
+//  Implemented      outputs.files file("${projectDir}/plan-output.bin")
+//  Implemented      outputs.files file("${projectDir}/plan-output")
 //
 //        dependsOn validate, ":docker-certificates:build"
 //

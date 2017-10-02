@@ -1,13 +1,51 @@
-package dk.danskespil.gradle.plugins.terraform
+package dk.danskespil.gradle.plugins.terraform.wip
 
 import dk.danskespil.gradle.plugins.helpers.DSSpecification
+import dk.danskespil.gradle.plugins.terraform.Plan
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.TaskOutcome
 import spock.lang.Unroll
 
 class PlanTest extends DSSpecification {
-    def "I can write plan output to a file"() {
+// This is what we are coding against:
+//    task plan {
+//        inputs.files fileTree("$projectDir").include('*.tf')
+//        inputs.files fileTree("$projectDir").include('*.tpl')
+//        inputs.files get.outputs.files
+//        inputs.files remoteConfig.outputs.files
+//
+//        outputs.files file("${projectDir}/plan-output.bin")
+//        outputs.files file("${projectDir}/plan-output")
+//
+//        dependsOn validate, ":docker-certificates:build"
+//
+//        doLast {
+//            TerraformStatic.plan(project)
+//        }
+//    }
+
+    def "Can save output from plan in a text file"() {
+        given:
+        buildFile << """
+          plugins { 
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+          
+          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+             outAsText=file('plan-output')
+          }
+        """
+
+        when:
+        def result = buildWithTasks('cut')
+
+        then:
+        result
+        result.task(':cut').outcome == TaskOutcome.SUCCESS
+    }
+
+    def "Can write plan output to a file"() {
         given:
         buildFile << """
           plugins { 
@@ -104,6 +142,7 @@ class PlanTest extends DSSpecification {
           }
           
           task cut(type: dk.danskespil.gradle.plugins.terraform.Plan)
+          
         """
 
         // Simulate input file
@@ -130,43 +169,46 @@ class PlanTest extends DSSpecification {
     }
 
     @Unroll
-    def "build is performed again if file '#outputfile'  is deleted by user after first build"() {
+    def "build is performed again if file '#outputfile' is deleted by user after first build"() {
         given:
         buildFile << """
           plugins { 
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan)
+          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+            out = file('plan-output.bin')
+            doLast {
+              // Since terraform is not executed, I am faking creation of the outputfile   
+              file('plan-output.bin').createNewFile()
+            }
+          }
         """
 
         // Simulate input file
         File simulatedInputFile = createNewPath('terraform.tf')
+
         simulatedInputFile << "simulated content"
-        File simulatedOutputFile = createNewPath('plan-output')
-        simulatedOutputFile.createNewFile()
-        simulatedOutputFile << "simulated content"
 
         when:
         def build1 = buildWithTasks('cut')
 
         def build2 = buildWithTasks('cut')
-        simulatedOutputFile << 'new content'
-        //simulatedOutputFile.delete()
+        new File(testProjectDir.root.getAbsolutePath() + '/plan-output.bin').delete()
 
         def build3 = buildWithTasks('cut')
 
         def build4 = buildWithTasks('cut')
 
         then:
-        simulatedOutputFile.exists()
+        //simulatedOutputFile.exists()
         build1.task(':cut').outcome == TaskOutcome.SUCCESS
-        simulatedOutputFile.text.contains('new content')
+        //simulatedOutputFile.text.contains('new content')
         build2.task(':cut').outcome == TaskOutcome.UP_TO_DATE
         build3.task(':cut').outcome == TaskOutcome.SUCCESS
         build4.task(':cut').outcome == TaskOutcome.UP_TO_DATE
 
         where:
-        outputfile << ['plan-output']
+        outputfile << ['plan-output.bin']
     }
 }

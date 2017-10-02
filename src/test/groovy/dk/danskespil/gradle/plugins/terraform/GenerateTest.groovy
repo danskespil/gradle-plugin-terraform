@@ -85,7 +85,6 @@ class GenerateTest extends DSSpecification {
 
           task generateVersionFile(type: Generate) {
               version = '2.0'
-              outputFile = file("\$project.buildDir/version.txt")
           }
            
           task showContents {

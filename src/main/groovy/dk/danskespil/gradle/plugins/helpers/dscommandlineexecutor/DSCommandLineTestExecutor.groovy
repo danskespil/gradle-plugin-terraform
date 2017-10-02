@@ -1,5 +1,6 @@
 package dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor
 
+import dk.danskespil.gradle.plugins.terraform.Plan
 import org.gradle.api.Project
 
 class DSCommandLineTestExecutor extends AbstractDSCommandLineExecutor {
@@ -9,5 +10,10 @@ class DSCommandLineTestExecutor extends AbstractDSCommandLineExecutor {
 
     def execute(String command) {
         println command
+    }
+
+    def executeExecSpec(Plan task, Closure e) {
+        task.commandLine.prefix 'echo'
+        task.project.exec e
     }
 }

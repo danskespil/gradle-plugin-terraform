@@ -24,6 +24,7 @@ class Generate extends DefaultTask {
 //            file.parentFile.mkdirs()
 //            file.createNewFile()
 //        }
-        getOutputFile().write "Version: ${getVersion()}"
+        //getOutputFile().write "Version: ${getVersion()}"
+        getOutputFile().createNewFile()
     }
 }

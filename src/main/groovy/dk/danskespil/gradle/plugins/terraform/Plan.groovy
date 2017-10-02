@@ -16,9 +16,9 @@ class Plan extends DefaultTask {
     // From terraform --help plan
     // -out=path           Write a plan file to the given path. This can be used as input to the "apply" command.
     File tfNativeArgOut
-    @Optional
-    @OutputFile
-    File outAsText
+//    @Optional
+//    @OutputFile
+//    File outAsText
     @Internal
     CommandLine commandLine = new CommandLine()
 

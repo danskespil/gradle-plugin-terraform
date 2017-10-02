@@ -9,10 +9,6 @@ class TerraformPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         applyJavaPluginSoWeHaveDanskeSpilDefaultTasksAtHand(project)
-    }
-
-    private applyJavaPluginSoWeHaveDanskeSpilDefaultTasksAtHand(Project project) {
-        project.apply(plugin: JavaPlugin)
 
         Get tfGet = project.task(type:Get, 'tfGet')
         Init tfInit = project.task(type:Init, 'tfInit')
@@ -22,5 +18,10 @@ class TerraformPlugin implements Plugin<Project> {
             inputs.files tfInit.outputs.files
             tfNativeArgOut = project.file('plan-output.bin')
         }
+    }
+
+    private applyJavaPluginSoWeHaveDanskeSpilDefaultTasksAtHand(Project project) {
+        project.apply(plugin: JavaPlugin)
+
     }
 }

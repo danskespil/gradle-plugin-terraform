@@ -57,4 +57,20 @@ class TerraformPluginTest extends DSSpecification {
         plan
         plan.taskDependencies.getDependencies(plan).contains(get)
     }
+
+    def "Plan depends on Init, so A user can call plan on a fresh clone, initialization is done automatically"() {
+        given:
+        Project project = ProjectBuilder.builder()
+                .withProjectDir(testProjectDir.root)
+                .build()
+
+        when:
+        project.plugins.apply(TerraformPlugin)
+        Plan plan = project.tasks.getByName('tfPlan')
+        Init init = project.tasks.getByName('tfInit')
+
+        then:
+        plan
+        plan.taskDependencies.getDependencies(plan).contains(init)
+    }
 }

@@ -15,11 +15,13 @@ class TerraformPlugin implements Plugin<Project> {
         project.apply(plugin: JavaPlugin)
 
         Get tfGet = project.task(type:Get, 'tfGet')
+        Init tfInit = project.task(type:Init, 'tfInit')
+
         project.task(type:Plan, 'tfPlan') {
             inputs.files tfGet.outputs.files
+            inputs.files tfInit.outputs.files
             tfNativeArgOut = project.file('plan-output.bin')
         }
 
-        Init tfInit = project.task(type:Init, 'tfInit')
     }
 }

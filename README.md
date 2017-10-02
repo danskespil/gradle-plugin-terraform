@@ -10,7 +10,7 @@ This README would normally document whatever steps are necessary to get your app
 
 ### How do I get set up? ###
 
-* Build the code : ```./gradlew clean build
+* Build the code : ```./gradlew clean build```
 * How to run tests
 ** ./gradlew test # Simple version
 ** ./gradlew --continuous --info test # Keep testing
@@ -26,4 +26,5 @@ This README would normally document whatever steps are necessary to get your app
 ### Who do I talk to? ###
 
 * Jesper Wermuth wermuth@lundogbendsen.dk
-* Mads Brouer, Danske spil
+* Mads Brouer, Danske
+ spil

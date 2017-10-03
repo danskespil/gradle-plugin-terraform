@@ -74,6 +74,22 @@ class TerraformPluginTest extends DSSpecification {
         plan.taskDependencies.getDependencies(plan).contains(init)
     }
 
+    def "Apply depends on Plan, so A user can call apply directly"() {
+        given:
+        Project project = ProjectBuilder.builder()
+                .withProjectDir(testProjectDir.root)
+                .build()
+
+        when:
+        project.plugins.apply(TerraformPlugin)
+        Plan plan = project.tasks.getByName('tfPlan')
+        Apply apply = project.tasks.getByName('tfApply')
+
+        then:
+        apply
+        apply.taskDependencies.getDependencies(apply).contains(plan)
+    }
+
     @Unroll
     def "Main task '#task' is described when running gradle tasks"() {
         given:

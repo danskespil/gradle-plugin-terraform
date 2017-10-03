@@ -4,22 +4,6 @@ import dk.danskespil.gradle.plugins.helpers.DSSpecification
 import org.gradle.testkit.runner.TaskOutcome
 
 class PlanOutputTest extends DSSpecification {
-// This is what we are coding against:
-//    task plan {
-//        inputs.files fileTree("$projectDir").include('*.tf')
-//        inputs.files fileTree("$projectDir").include('*.tpl')
-//        inputs.files get.outputs.files
-//        inputs.files remoteConfig.outputs.files
-//
-//        outputs.files file("${projectDir}/plan-output.bin")
-//        outputs.files file("${projectDir}/plan-output")
-//
-//        dependsOn validate, ":docker-certificates:build"
-//
-//        doLast {
-//            TerraformStatic.plan(project)
-//        }
-//    }
 
     def "Can save output from plan in a text file"() {
         given:

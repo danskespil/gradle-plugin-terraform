@@ -77,41 +77,10 @@ class TerraformPluginTest extends DSSpecification {
         callerTask.taskDependencies.getDependencies(callerTask).contains(calleeTask)
 
         where:
-        caller    | callee    | reason
-        'tfPlan'  | 'tfValidate'  | "Explicitly validate before applying"
-
-    }
-
-    def "Plan depends on Init, so A user can call plan on a fresh clone, initialization is done automatically"() {
-        given:
-        Project project = ProjectBuilder.builder()
-                .withProjectDir(testProjectDir.root)
-                .build()
-
-        when:
-        project.plugins.apply(TerraformPlugin)
-        Plan plan = project.tasks.getByName('tfPlan')
-        Init init = project.tasks.getByName('tfInit')
-
-        then:
-        plan
-        plan.taskDependencies.getDependencies(plan).contains(init)
-    }
-
-    def "Apply depends on Plan, so A user can call apply directly"() {
-        given:
-        Project project = ProjectBuilder.builder()
-                .withProjectDir(testProjectDir.root)
-                .build()
-
-        when:
-        project.plugins.apply(TerraformPlugin)
-        Plan plan = project.tasks.getByName('tfPlan')
-        Apply apply = project.tasks.getByName('tfApply')
-
-        then:
-        apply
-        apply.taskDependencies.getDependencies(apply).contains(plan)
+        caller    | callee        | reason
+        'tfPlan'  | 'tfValidate'  | "so validation is done explicitly before applying"
+        'tfPlan'  | 'tfInit'      | "sa user can call plan on a fresh clone, initialization is done automatically"
+        'tfApply' | 'tfPlan'      | "so user can call apply directly and plan is done automatically"
     }
 
     @Unroll

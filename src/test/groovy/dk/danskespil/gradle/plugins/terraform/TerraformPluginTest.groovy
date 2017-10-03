@@ -91,7 +91,7 @@ class TerraformPluginTest extends DSSpecification {
         build.output.contains(task)
 
         where:
-        task << ['tfPlan', 'tfGet', 'tfInit']
+        task << ['tfPlan', 'tfGet', 'tfInit', 'tfApply']
     }
 
 }

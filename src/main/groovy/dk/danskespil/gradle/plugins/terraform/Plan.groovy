@@ -7,6 +7,7 @@ import org.gradle.process.ExecSpec
 
 class Plan extends TerraformTask
 {
+    // These inputfiles are the same for Validate and Plan
     @InputFiles
     FileCollection terraformFiles = project.fileTree('.').include('*.tf')
     @InputFiles

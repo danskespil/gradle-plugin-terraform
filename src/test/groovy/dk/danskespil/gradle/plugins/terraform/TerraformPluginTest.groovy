@@ -2,6 +2,7 @@ package dk.danskespil.gradle.plugins.terraform
 
 import dk.danskespil.gradle.plugins.helpers.DSSpecification
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.TaskOutcome
 import spock.lang.Unroll
@@ -58,6 +59,29 @@ class TerraformPluginTest extends DSSpecification {
         plan.taskDependencies.getDependencies(plan).contains(get)
     }
 
+    @Unroll
+    def "task #caller depends on #callee so #reason"() {
+        given:
+        Project project = ProjectBuilder.builder()
+                .withProjectDir(testProjectDir.root)
+                .build()
+
+        when:
+        project.plugins.apply(TerraformPlugin)
+        Task callerTask = project.tasks.getByName(caller)
+        Task calleeTask = project.tasks.getByName(callee)
+
+        then:
+        callerTask
+        calleeTask
+        callerTask.taskDependencies.getDependencies(callerTask).contains(calleeTask)
+
+        where:
+        caller    | callee    | reason
+        'tfPlan'  | 'tfValidate'  | "Explicitly validate before applying"
+
+    }
+
     def "Plan depends on Init, so A user can call plan on a fresh clone, initialization is done automatically"() {
         given:
         Project project = ProjectBuilder.builder()
@@ -107,7 +131,7 @@ class TerraformPluginTest extends DSSpecification {
         build.output.contains(task)
 
         where:
-        task << ['tfPlan', 'tfGet', 'tfInit', 'tfApply']
+        task << ['tfPlan', 'tfGet', 'tfInit', 'tfApply', 'tfValidate']
     }
 
 }

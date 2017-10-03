@@ -31,6 +31,12 @@ This README would normally document whatever steps are necessary to get your app
  
 # Versions
 
+## 0.0.3-SNAPSHOT
+* Validate
+
+## 0.0.2
+* Has apply
+
 ## 0.0.2-SNAPSHOT
 * make it easy to distinguish between flags and options provided by terraform and 
 those provided by the plugin. Example --out is provided by terraform, and it saves the output of

@@ -9,16 +9,13 @@ import org.gradle.process.ExecSpec
 /**
  * Wraps cli terraform validate
  */
-class Validate extends TerraformTask {
+
+class Validate extends TerraformBaseTask {
     // These inputfiles are the same for Validate and Plan
     @OutputFiles
     FileCollection oTerraformFiles = project.fileTree('.').include('*.tf').include('*.tpl')
-//    @OutputFiles
-//    FileCollection oTemplateFiles = project.fileTree('.').include('*.tpl')
     @InputFiles
-    FileCollection iTerraformFiles = project.fileTree('.').include('*.tf')
-    @InputFiles
-    FileCollection iTemplateFiles = project.fileTree('.').include('*.tpl')
+    FileCollection iTerraformFiles = project.fileTree('.').include('*.tf').include('*.tpl')
 
     @TaskAction
     action() {

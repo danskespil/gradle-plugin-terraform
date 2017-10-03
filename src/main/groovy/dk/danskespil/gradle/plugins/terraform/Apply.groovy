@@ -9,7 +9,7 @@ import org.gradle.process.ExecSpec
 /**
  * Wraps cli command: terraform apply
  */
-class Apply extends TerraformTask {
+class Apply extends TerraformBaseTask {
     @Optional
     @InputFile
     File plan

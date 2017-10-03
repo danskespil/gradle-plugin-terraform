@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor
 
-import dk.danskespil.gradle.plugins.terraform.TerraformTask
+import dk.danskespil.gradle.plugins.terraform.TerraformBaseTask
 import org.gradle.api.Project
 
 abstract class AbstractDSCommandLineExecutor {
@@ -10,5 +10,5 @@ abstract class AbstractDSCommandLineExecutor {
         this.project = project
     }
 
-    abstract def executeExecSpec(TerraformTask task, Closure e)
+    abstract def executeExecSpec(TerraformBaseTask task, Closure e)
 }

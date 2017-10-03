@@ -6,7 +6,7 @@ import org.gradle.api.tasks.OutputFiles
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecSpec
 
-class Get extends TerraformTask {
+class Get extends TerraformBaseTask {
     @OutputFiles
     FileCollection outputFilesSoGradleOnlyBuildsWhenItChanges = project.fileTree('.terraform/modules')
 

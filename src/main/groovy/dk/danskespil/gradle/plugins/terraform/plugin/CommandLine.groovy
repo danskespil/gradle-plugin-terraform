@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.terraform
+package dk.danskespil.gradle.plugins.terraform.plugin
 
 class CommandLine implements Iterable<String> {
     private List<String> commandLine = new ArrayList<String>()

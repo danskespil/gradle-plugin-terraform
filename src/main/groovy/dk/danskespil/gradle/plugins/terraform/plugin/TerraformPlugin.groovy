@@ -1,5 +1,10 @@
-package dk.danskespil.gradle.plugins.terraform
+package dk.danskespil.gradle.plugins.terraform.plugin
 
+import dk.danskespil.gradle.plugins.terraform.Apply
+import dk.danskespil.gradle.plugins.terraform.Get
+import dk.danskespil.gradle.plugins.terraform.Init
+import dk.danskespil.gradle.plugins.terraform.Plan
+import dk.danskespil.gradle.plugins.terraform.Validate
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
@@ -8,7 +13,7 @@ class TerraformPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        applyJavaPluginSoWeHaveDanskeSpilDefaultTasksAtHand(project)
+        applyJavaPluginSoWeHaveCommonTasksSuchAsCleanAtHand(project)
 
         Get tfGet = project.task(type:Get, 'tfGet')
         Init tfInit = project.task(type:Init, 'tfInit')
@@ -26,7 +31,7 @@ class TerraformPlugin implements Plugin<Project> {
 
     }
 
-    private applyJavaPluginSoWeHaveDanskeSpilDefaultTasksAtHand(Project project) {
+    private applyJavaPluginSoWeHaveCommonTasksSuchAsCleanAtHand(Project project) {
         project.apply(plugin: JavaPlugin)
     }
 }

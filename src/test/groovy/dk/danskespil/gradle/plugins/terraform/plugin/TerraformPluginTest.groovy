@@ -1,6 +1,8 @@
-package dk.danskespil.gradle.plugins.terraform
+package dk.danskespil.gradle.plugins.terraform.plugin
 
 import dk.danskespil.gradle.plugins.helpers.DSSpecification
+import dk.danskespil.gradle.plugins.terraform.Get
+import dk.danskespil.gradle.plugins.terraform.Plan
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
@@ -50,7 +52,7 @@ class TerraformPluginTest extends DSSpecification {
                 .build()
 
         when:
-        project.plugins.apply(TerraformPlugin)
+        project.plugins.apply(dk.danskespil.gradle.plugins.terraform.plugin.TerraformPlugin)
         Plan plan = project.tasks.getByName('tfPlan')
         Get get = project.tasks.getByName('tfGet')
 
@@ -67,7 +69,7 @@ class TerraformPluginTest extends DSSpecification {
                 .build()
 
         when:
-        project.plugins.apply(TerraformPlugin)
+        project.plugins.apply(dk.danskespil.gradle.plugins.terraform.plugin.TerraformPlugin)
         Task callerTask = project.tasks.getByName(caller)
         Task calleeTask = project.tasks.getByName(callee)
 
@@ -102,5 +104,4 @@ class TerraformPluginTest extends DSSpecification {
         where:
         task << ['tfPlan', 'tfGet', 'tfInit', 'tfApply', 'tfValidate']
     }
-
 }

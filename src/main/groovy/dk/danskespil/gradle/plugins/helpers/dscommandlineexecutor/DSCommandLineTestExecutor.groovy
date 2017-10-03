@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor
 
-import dk.danskespil.gradle.plugins.terraform.TerraformTask
+import dk.danskespil.gradle.plugins.terraform.TerraformBaseTask
 import org.gradle.api.Project
 
 class DSCommandLineTestExecutor extends AbstractDSCommandLineExecutor {
@@ -8,7 +8,7 @@ class DSCommandLineTestExecutor extends AbstractDSCommandLineExecutor {
         super(project)
     }
 
-    def executeExecSpec(TerraformTask task, Closure e) {
+    def executeExecSpec(TerraformBaseTask task, Closure e) {
         task.commandLine.prefix 'echo'
         task.project.exec e
     }

@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.terraform
+package dk.danskespil.gradle.plugins.terraform.tasks
 
 import dk.danskespil.gradle.plugins.helpers.DSSpecification
 import org.gradle.testkit.runner.TaskOutcome
@@ -11,7 +11,7 @@ class ValidateTest extends DSSpecification {
           plugins {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
-  
+
           task cut(type: dk.danskespil.gradle.plugins.terraform.Validate)
         """
 
@@ -23,16 +23,16 @@ class ValidateTest extends DSSpecification {
     }
 
     @Unroll
-    def "Only when certain #filetypes change, task is executed"() {
+    def "Only when files with extension #extensionExample change, task is executed"() {
         given:
         buildFile << """
           plugins {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
-  
+
           task cut(type: dk.danskespil.gradle.plugins.terraform.Validate)
         """
-        File monitoredFile = createNewPath(filetypes) << "content"
+        File monitoredFile = createNewPath(extensionExample) << "content"
         def build1 = buildWithTasks(':cut')
 
         when:
@@ -46,6 +46,6 @@ class ValidateTest extends DSSpecification {
         build3.task(':cut').outcome == TaskOutcome.SUCCESS
 
         where:
-        filetypes << ['file.tf', 'file.tpl']
+        extensionExample << ['file.tf', 'file.tpl']
     }
 }

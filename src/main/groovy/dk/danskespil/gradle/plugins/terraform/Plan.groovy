@@ -1,11 +1,12 @@
 package dk.danskespil.gradle.plugins.terraform
 
 import dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor.DSCommandLineExecutorFactory
+import dk.danskespil.gradle.plugins.terraform.plugin.EchoOutputStream
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.*
 import org.gradle.process.ExecSpec
 
-class Plan extends TerraformTask
+class Plan extends TerraformBaseTask
 {
     // These inputfiles are the same for Validate and Plan
     @InputFiles

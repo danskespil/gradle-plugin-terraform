@@ -18,7 +18,7 @@ class Plan extends TerraformTask
     File tfNativeArgOut
     @Optional
     @OutputFile
-    File outAsText
+    File out
 
     @TaskAction
     action() {
@@ -28,9 +28,9 @@ class Plan extends TerraformTask
             commandLine.addToEnd("-out=${tfNativeArgOut.name}")
         }
         OutputStream echoOutputHereToo = new EchoOutputStream(new ByteArrayOutputStream(), System.out)
-        if (outAsText) {
-            outAsText.createNewFile()
-            echoOutputHereToo = new EchoOutputStream(echoOutputHereToo, new PrintStream(outAsText))
+        if (out) {
+            out.createNewFile()
+            echoOutputHereToo = new EchoOutputStream(echoOutputHereToo, new PrintStream(out))
         }
 
         echoOutputHereToo.withStream { os ->
@@ -43,10 +43,10 @@ class Plan extends TerraformTask
 
     @Override
     String getDescription() {
-        return """wraps terraform plan. You can set -out='filename' with and get textual output into a file with outAsText
+        return """wraps terraform plan. You can set -out='filename' with and get textual output into a file with out
     task(type: dk.danskespil.gradle.plugins.terraform.Plan) {
       tfNativeArgOut=file('output.bin')
-      outAsText=file('textversion.txt')
+      out=file('textversion.txt')
     }
     """
     }

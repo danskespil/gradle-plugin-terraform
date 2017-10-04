@@ -1,14 +1,90 @@
-# README #
+# What is this repository for? 
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This plugin helps us, at Danske Spil, to use Hashicorps ```terraform``` for production and test systems.
+When we started using terraform, we just used the cli. However, soon we found that there is a workflow when we use terraform.
+One example is, that we save the textual output from.
 
-### What is this repository for? ###
+This plugin is written for terraform 0.10.4. It will most likely work with 0.10.x versions, but 
+no guarantees are given. 
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+```terraform plan```
 
-### How do I get set up? ###
+in a file, and commit it to git when we have done an apply. This is done for auditing reasons. To do that, you have to 
+do _something like_ (the real flow is more complex, and the example below is pseudo-code) 
+
+```
+// run plan and save the output in a file
+terraform plan > plan-output
+// inspect output visually
+// commit the file
+git commit -m "plan-output" plan-output
+// Perform the change
+terraform apply
+``` 
+
+Even if you remember to do the above steps _every time_, 
+
+* Every now and then, we have to do a ```terraform get``` to get ```terraform plan``` to run.
+* After a fresh clone, you have to do a ```terraform init``` to get stuff initialized.
+* ...
+
+So, to make sure we follow the workflow we have defined to be the best, and to make sure we
+remember to do the auditing we want, we codified it in this gradle plugin.
+
+## How do I use it
+
+Well. There are a number of tests in the repo you can read. Here is a brief overview, 
+but remember that the source code is _always_ the truth. These words are merely shadows on the wall.
+
+This is how you include and apply the plugin
+```text
+buildscript {
+    repositories {
+        maven { url "${artifactory_contextUrl}" + "/integration" }
+    }
+    dependencies {
+        classpath(group: 'dk.danskespil.gradle.plugins', name: 'ds-gradle-plugin-terraform', version: 'X.Y.Z')
+    }
+}
+apply plugin: 'dk.danskespil.gradle.plugins.terraform'
+```
+this gives you a number of tasks, that represent a subset of terraforms cli commands, e.g.
+* plan (called tfPlan)
+* validate (called tfValidate)
+* apply (called tfApply)
+* init (called tfInit)
+* get (called tfGet)
+
+you call them like this
+```text
+./gradlew tfPlan
+./gradlew tfApply
+...
+```
+The tasks have inter-dependencies, e.g. tfApply uses the plan-output.bin from tfPlan to make its apply,
+so it will call tfPlan for you if its not present.
+Likewise tfPlan will call terraform plan for you and produce plan-output.bin and plan-output. 
+If you call it again, it will only actually execute terraform plan if your *.tf or *.tpl files has changed
+since last time it was called. This can save considerable amounts of time if you are building even mid-sized
+infrastructures.
+
+When applying the plugin itself, you get a configured version of the tasks that works in a reasonable way.
+e.g. tfPlan writes textual output to plan-output by default, and the binary plan to plan-output.bin by default.
+
+You can create custom version of the tasks like so
+```text
+task myPlan(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+    out=file('my-better-bin-name.bin'
+    outAsText=file('my-better-text-name.text'
+}
+```
+if you want to, but if you just want a workflow that works as our default, use the tasks 
+provided by the plugin. They have been configured for you. If you create custom tasks you
+have to configure them yourself.
+
+# How do I contribute
+Join the party - write a test, code the functionality.
+## How do I get set up? 
 
 * Build the code : ```./gradlew clean build```
 * How to run tests
@@ -19,17 +95,17 @@ This README would normally document whatever steps are necessary to get your app
 ** ./gradlew publish # SNAPSHOT
 ** ./gradlew clean release publish -Prelease.scope=major_minor_OR_patch -Prelease.stage=final -Partifactory_plugins_repo=plugins-release -Partifactory_user=gatekeeper -Partifactory_password=***REMOVED*** # RELEASE
 
-### Contribution guidelines ###
+## Contribution guidelines 
 
 * This is a TDD project. Respect that by writing your test before your code, reuse the existing test classes and helpers and you will be fine
 
 ### Who do I talk to? ###
 
 * Jesper Wermuth wermuth@lundogbendsen.dk
-* Mads Brouer, Danske
- spil
  
 # Versions
+
+## 0.0.4-SNAPSHOT
 
 ## 0.0.3-SNAPSHOT
 * Validate

@@ -95,7 +95,8 @@ _modules_
 // apply plugin
 tfGet {
   inputs.files fileTree("$rootDir/modules")
-  outputs.files fileTree("$rootDir/modules")
+  // the output is configured by default in the plugin, so you do not have to do that 
+  // outputs.files fileTree("$projectDir/.terraform/modules")
 }
 ```
 
@@ -123,7 +124,7 @@ Join the party - write a test, code the functionality.
 # Versions
 
 ## 0.0.4-SNAPSHOT
-* tfGet is only executed when module 
+* documentation on tfGet 
 
 ## 0.0.3-SNAPSHOT
 * Validate

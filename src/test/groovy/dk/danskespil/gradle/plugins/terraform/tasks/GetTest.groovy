@@ -30,21 +30,18 @@ class GetTest extends DSSpecification {
           
           task cut(type: dk.danskespil.gradle.plugins.terraform.Get) {
             doLast {
-              // Since terraform is not executed during test, I am faking creation of the outputfile
-              //project.mkdir('.terraform/modules')
+              // Since terraform is not executed during test, I am faking creation of the outputfiles
               project.file('.terraform/').mkdir()
               project.file('.terraform/modules/').mkdir()
               project.file('.terraform/modules/a-module').createNewFile()
             }
           }
         """
+        def build1 = buildWithTasks('cut')
+        def build2 = buildWithTasks('cut')
 
         when:
-        def build1 = buildWithTasks('cut')
-
-        def build2 = buildWithTasks('cut')
-        new File(testProjectDir.root.getAbsolutePath() + "/.terraform/modules").deleteDir()
-
+        file("/.terraform/modules").deleteDir()
         def build3 = buildWithTasks('cut')
 
         then:

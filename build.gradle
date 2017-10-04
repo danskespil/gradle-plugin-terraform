@@ -47,7 +47,7 @@ gradlePlugin {
     plugins {
         "terraform" {
             id = "dk.danskespil.gradle.plugins.terraform"
-            implementationClass = 'dk.danskespil.gradle.plugins.terraform.TerraformPlugin'
+            implementationClass = 'dk.danskespil.gradle.plugins.terraform.plugin.TerraformPlugin'
         }
     }
 }

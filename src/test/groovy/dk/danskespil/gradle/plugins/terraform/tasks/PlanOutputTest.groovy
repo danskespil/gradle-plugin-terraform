@@ -4,8 +4,72 @@ import dk.danskespil.gradle.plugins.helpers.DSSpecification
 import org.gradle.testkit.runner.TaskOutcome
 
 class PlanOutputTest extends DSSpecification {
+    def "plan task provided by plugin creates binary files as output by default"() {
+        given:
+        buildFile << """
+          plugins { 
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+        """
 
-    def "Can save output from plan in a text file"() {
+        when:
+        def result = buildWithTasks('tfPlan')
+
+        then:
+        result.task(':tfPlan').outcome == TaskOutcome.SUCCESS
+        result.output.contains('terraform plan')
+        result.output.contains('-out')
+    }
+
+    def "plan task provided by plugin creates text files as output by default"() {
+        given:
+        buildFile << """
+          plugins { 
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+        """
+
+        when:
+        def result = buildWithTasks('tfPlan')
+
+        then:
+        exists('/plan-output')
+    }
+
+    def "plan task provided by plugin writes to stdout by default"() {
+        given:
+        buildFile << """
+          plugins { 
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+        """
+
+        when:
+        def result = buildWithTasks('tfPlan')
+
+        then:
+        result.output.contains('terraform plan')
+    }
+
+    def "custom plan task can write plan output to a file"() {
+        given:
+        buildFile << """
+          plugins { 
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+          
+          import dk.danskespil.gradle.plugins.terraform.Plan
+          task cut(type: Plan)
+        """
+
+        when:
+        def result = buildWithTasks('cut')
+
+        then:
+        result.output.contains('terraform plan')
+    }
+
+    def "custom plan task can save output from plan in a text file"() {
         given:
         buildFile << """
           plugins {
@@ -13,7 +77,7 @@ class PlanOutputTest extends DSSpecification {
           }
 
           task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
-             out=file('plan-output')
+             outAsText=file('plan-output')
           }
         """
 
@@ -26,7 +90,7 @@ class PlanOutputTest extends DSSpecification {
         new File(testProjectDir.root.getAbsolutePath() + "/plan-output").exists()
     }
 
-    def "When saving output from plan to a text file, its also echoed to stdout, so the user can see it"() {
+    def "custom plan task writes to stdout by default"() {
         given:
         buildFile << """
           plugins {
@@ -47,7 +111,7 @@ class PlanOutputTest extends DSSpecification {
         result.output.contains('terraform plan')
     }
 
-    def "When saving output from plan to a text file, that text file contains the expected output"() {
+    def "When saving output from custom plan task to a text file, that text file contains the expected output"() {
         given:
         buildFile << """
           plugins {
@@ -55,7 +119,7 @@ class PlanOutputTest extends DSSpecification {
           }
 
           task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
-             out=file('plan-output')
+             outAsText=file('plan-output')
           }
         """
 
@@ -65,11 +129,11 @@ class PlanOutputTest extends DSSpecification {
         then:
         result
         result.task(':cut').outcome == TaskOutcome.SUCCESS
-        new File(testProjectDir.root.getAbsolutePath() + "/plan-output").exists()
-        new File(testProjectDir.root.getAbsolutePath() + "/plan-output").text.contains('terraform plan')
+        exists("/plan-output")
+        file("/plan-output").text.contains('terraform plan')
     }
 
-    def "only when file with textual output is deleted, its rebuild"() {
+    def "only when file with textual output is deleted, custom plan task its rebuild"() {
         given:
         buildFile << """
           plugins {
@@ -77,14 +141,14 @@ class PlanOutputTest extends DSSpecification {
           }
 
           task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
-             out=file('plan-output')
+             outAsText=file('plan-output')
           }
         """
 
         when:
         def build1 = buildWithTasks('cut')
         def build2 = buildWithTasks('cut')
-        new File(testProjectDir.root.getAbsolutePath() + '/plan-output').delete()
+        file('/plan-output').delete()
         def build3 = buildWithTasks('cut')
 
         then:

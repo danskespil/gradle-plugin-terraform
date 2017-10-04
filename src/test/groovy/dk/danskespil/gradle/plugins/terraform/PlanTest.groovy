@@ -24,28 +24,10 @@ class PlanTest extends DSSpecification {
 //        }
 //    }
 
-    def "Can write plan output to a file"() {
-        given:
-        buildFile << """
-          plugins { 
-              id 'dk.danskespil.gradle.plugins.terraform'
-          }
-          
-          import dk.danskespil.gradle.plugins.terraform.Plan
-          task cut(type: Plan)
-        """
-
-        when:
-        def result = buildWithTasks('cut')
-
-        then:
-        result.output.contains('terraform plan')
-    }
-
-    def "Plan picks up any .tf files"() {
+    def "Plan picks up any .tf and .tpl files"() {
         given:
         createNewPath('terraform1.tf')
-        createNewPath('terraform2.tf')
+        createNewPath('terraform2.tpl')
 
         when:
         Project project = ProjectBuilder.builder()
@@ -58,29 +40,6 @@ class PlanTest extends DSSpecification {
         cut
         !cut.getTerraformFiles().empty
         cut.terraformFiles.files.size() == 2
-    }
-
-    def "Build is not performed when .tf files do not change"() {
-        given:
-        buildFile << """
-          plugins { 
-              id 'dk.danskespil.gradle.plugins.terraform'
-          }
-          
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan)
-        """
-
-        createNewPath('terraform.tf')
-
-        when:
-        def build1 = buildWithTasks('cut')
-        def build2 = buildWithTasks('cut')
-
-        then:
-        build1
-        build2
-        build1.task(':cut').outcome == TaskOutcome.SUCCESS
-        build2.task(':cut').outcome == TaskOutcome.UP_TO_DATE
     }
 
     @Unroll
@@ -155,7 +114,7 @@ class PlanTest extends DSSpecification {
           }
           
           task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
-            tfNativeArgOut = file('plan-output.bin')
+            out = file('plan-output.bin')
             doLast {
               // Since terraform is not executed during test, I am faking creation of the outputfile   
               file('plan-output.bin').createNewFile()

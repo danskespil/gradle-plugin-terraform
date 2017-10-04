@@ -1,13 +1,11 @@
 package dk.danskespil.gradle.plugins.terraform.plugin
 
-import dk.danskespil.gradle.plugins.terraform.Apply
-import dk.danskespil.gradle.plugins.terraform.Get
-import dk.danskespil.gradle.plugins.terraform.Init
-import dk.danskespil.gradle.plugins.terraform.Plan
-import dk.danskespil.gradle.plugins.terraform.Validate
+import dk.danskespil.gradle.plugins.terraform.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.tasks.Delete
 
 class TerraformPlugin implements Plugin<Project> {
 
@@ -22,13 +20,22 @@ class TerraformPlugin implements Plugin<Project> {
         Plan tfPlan = project.task(type:Plan, 'tfPlan', dependsOn: tfValidate) {
             inputs.files tfGet.outputs.files
             inputs.files tfInit.outputs.files
-            tfNativeArgOut = project.file('plan-output.bin')
+            out = project.file('plan-output.bin')
+            outAsText = project.file('plan-output')
         }
 
         Apply tfApply = project.task(type:Apply, 'tfApply') {
             inputs.files tfPlan.outputs.files
         }
 
+        cleanAlsoCleansFilesCreatedByTerraform(project)
+    }
+
+    private void cleanAlsoCleansFilesCreatedByTerraform(Project project) {
+        Task tfClean = project.task(type: Delete, 'tfClean') {
+            delete project.tasks.findByName('tfPlan').getOutputs()
+        }
+        project.tasks.findByName('clean').dependsOn(tfClean)
     }
 
     private applyJavaPluginSoWeHaveCommonTasksSuchAsCleanAtHand(Project project) {

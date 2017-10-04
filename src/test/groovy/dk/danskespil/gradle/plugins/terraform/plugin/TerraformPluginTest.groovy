@@ -26,23 +26,21 @@ class TerraformPluginTest extends DSSpecification {
     }
 
     @Unroll
-    def "I have #task in plugin"() {
+    def "terraform task '#task' is provided by plugin"() {
         given:
         buildFile << """
-        plugins {
-            id 'dk.danskespil.gradle.plugins.terraform'
-        }
+          plugins { 
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
         """
-
         when:
-        def result = buildWithTasks(task)
+        def build = buildWithTasks(task)
 
         then:
-        result
-        result.task(":${task}").outcome == TaskOutcome.SUCCESS
+        build.task(":${task}")
 
         where:
-        task << ['tfPlan', 'tfGet', 'tfInit']
+        task << ['tfPlan', 'tfValidate', 'tfApply', 'tfGet', 'tfInit', 'tfClean']
     }
 
     def "output from Get is input to Plan"() {
@@ -79,14 +77,14 @@ class TerraformPluginTest extends DSSpecification {
         callerTask.taskDependencies.getDependencies(callerTask).contains(calleeTask)
 
         where:
-        caller    | callee        | reason
-        'tfPlan'  | 'tfValidate'  | "so validation is done explicitly before applying"
-        'tfPlan'  | 'tfInit'      | "sa user can call plan on a fresh clone, initialization is done automatically"
-        'tfApply' | 'tfPlan'      | "so user can call apply directly and plan is done automatically"
+        caller    | callee       | reason
+        'tfPlan'  | 'tfValidate' | "so validation is done explicitly before applying"
+        'tfPlan'  | 'tfInit'     | "sa user can call plan on a fresh clone, initialization is done automatically"
+        'tfApply' | 'tfPlan'     | "so user can call apply directly and plan is done automatically"
     }
 
     @Unroll
-    def "Main task '#task' is described when running gradle tasks"() {
+    def "terraform task '#task' is described when running gradle tasks"() {
         given:
         buildFile << """
           plugins { 
@@ -103,5 +101,23 @@ class TerraformPluginTest extends DSSpecification {
 
         where:
         task << ['tfPlan', 'tfGet', 'tfInit', 'tfApply', 'tfValidate']
+    }
+
+    def "When calling task 'clean', task 'tfClean' will also be called"() {
+        given:
+        buildFile << """
+          plugins { 
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+        """
+        buildWithTasks('tfPlan')
+        def planOutputExistsAfterPlanTaskIsRun = exists('/plan-output')
+
+        when:
+        def build2 = buildWithTasks('clean')
+
+        then:
+        planOutputExistsAfterPlanTaskIsRun
+        build2.task(':tfClean').outcome == TaskOutcome.SUCCESS
     }
 }

@@ -33,6 +33,8 @@ This README would normally document whatever steps are necessary to get your app
 
 ## 0.0.3-SNAPSHOT
 * Validate
+* terraform arguments, such as -out, are called 'out' when they are implemented in tasks, e.g. Plan. This undo'es what
+  was done in 0.0.2-SNAPSHOT
 
 ## 0.0.2
 * Has apply

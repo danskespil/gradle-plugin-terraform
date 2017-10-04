@@ -10,29 +10,31 @@ class Plan extends TerraformBaseTask
 {
     // These inputfiles are the same for Validate and Plan
     @InputFiles
-    FileCollection terraformFiles = project.fileTree('.').include('*.tf')
-    @InputFiles
-    FileCollection templateFiles = project.fileTree('.').include('*.tpl')
+    FileCollection terraformFiles = project.fileTree('.').include('*.tf').include('*.tpl')
+
+    @Optional
+    @OutputFile
+    // As an extra feature the output from plan is saved to a file. This can be used for auditing, e.g. keep the
+    // file around, so you know what terraform said when this particular command was applied
+    File outAsText
+
     @Optional
     @OutputFile
     // From terraform --help plan
     // -out=path           Write a plan file to the given path. This can be used as input to the "apply" command.
-    File tfNativeArgOut
-    @Optional
-    @OutputFile
     File out
 
     @TaskAction
     action() {
         commandLine.addToEnd('terraform', 'plan')
 
-        if (tfNativeArgOut) {
-            commandLine.addToEnd("-out=${tfNativeArgOut.name}")
+        if (out) {
+            commandLine.addToEnd("-out=${out.name}")
         }
         OutputStream echoOutputHereToo = new EchoOutputStream(new ByteArrayOutputStream(), System.out)
-        if (out) {
-            out.createNewFile()
-            echoOutputHereToo = new EchoOutputStream(echoOutputHereToo, new PrintStream(out))
+        if (outAsText) {
+            outAsText.createNewFile()
+            echoOutputHereToo = new EchoOutputStream(echoOutputHereToo, new PrintStream(outAsText))
         }
 
         echoOutputHereToo.withStream { os ->
@@ -47,7 +49,7 @@ class Plan extends TerraformBaseTask
     String getDescription() {
         return """wraps terraform plan. You can set -out='filename' with and get textual output into a file with out
     task(type: dk.danskespil.gradle.plugins.terraform.Plan) {
-      tfNativeArgOut=file('output.bin')
+      out=file('output.bin')
       out=file('textversion.txt')
     }
     """

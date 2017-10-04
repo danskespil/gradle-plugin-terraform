@@ -33,4 +33,18 @@ class DSSpecification extends Specification {
     private void setupTestStubsByAddingMarkerFilesToAConventionallyNamedDirectory() {
         createNewPath("stubTheseFactories/${DSCommandLineExecutorFactory.getClass().getName()}")
     }
+
+    boolean exists(String path) {
+        if (!path.startsWith(File.separator)) {
+            path += File.pathSeparator + path
+        }
+        return new File(testProjectDir.root.absolutePath + "${path}").exists()
+    }
+
+    File file(String path) {
+        if (!path.startsWith(File.separator)) {
+            path += File.pathSeparator + path
+        }
+        return new File(testProjectDir.root.getAbsolutePath() + path)
+    }
 }

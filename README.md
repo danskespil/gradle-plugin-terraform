@@ -82,6 +82,23 @@ if you want to, but if you just want a workflow that works as our default, use t
 provided by the plugin. They have been configured for you. If you create custom tasks you
 have to configure them yourself.
 
+## Examples
+By simply applying the plugin, you can call tfPlan and expect that plan is called after all required
+initialization has been performed. This requires that you have a working terraform setup, e.g. that you
+are able to perform the terraform cli steps manually.
+
+However, since the plugin can not know where you have put your modules, you have to tell it. 
+You do that as done in the example below, assuming your module files are at the gradle root dir in directory 
+_modules_
+
+```text
+// apply plugin
+tfGet {
+  inputs.files fileTree("$rootDir/modules")
+  outputs.files fileTree("$rootDir/modules")
+}
+```
+
 # How do I contribute
 Join the party - write a test, code the functionality.
 ## How do I get set up? 
@@ -106,6 +123,7 @@ Join the party - write a test, code the functionality.
 # Versions
 
 ## 0.0.4-SNAPSHOT
+* tfGet is only executed when module 
 
 ## 0.0.3-SNAPSHOT
 * Validate

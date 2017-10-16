@@ -38,15 +38,9 @@ but remember that the source code is _always_ the truth. These words are merely 
 
 This is how you include and apply the plugin
 ```text
-buildscript {
-    repositories {
-        maven { url "${artifactory_contextUrl}" + "/integration" }
-    }
-    dependencies {
-        classpath(group: 'dk.danskespil.gradle.plugins', name: 'ds-gradle-plugin-terraform', version: 'X.Y.Z')
-    }
+plugins {
+  id "dk.danskespil.gradle.plugins.terraform" version "0.0.4"
 }
-apply plugin: 'dk.danskespil.gradle.plugins.terraform'
 ```
 this gives you a number of tasks, that represent a subset of terraforms cli commands, e.g.
 * plan (called tfPlan)

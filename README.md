@@ -2,14 +2,10 @@
 
 This plugin helps us, at Danske Spil, to use Hashicorps ```terraform``` for production and test systems.
 When we started using terraform, we just used the cli. However, soon we found that there is a workflow when we use terraform.
-One example is, that we save the textual output from ```terraform plan``` for auditing purposes.
 
-This plugin is written for terraform 0.10.4. It will most likely work with 0.10.x versions, but 
-no guarantees are given. 
-
-```terraform plan```
-
-in a file, and commit it to git when we have done an apply. This is done for auditing reasons. To do that, you have to 
+One usecase is, that we save the textual output from ```terraform plan``` in a file, and commit 
+it to git before we do an apply (NB: git committing is not part of this plugin). 
+This is done for auditing reasons. To do that, you have to 
 do _something like_ (the real flow is more complex, and the example below is pseudo-code) 
 
 ```
@@ -30,6 +26,9 @@ Even if you remember to do the above steps _every time_,
 
 So, to make sure we follow the workflow we have defined to be the best, and to make sure we
 remember to do the auditing we want, we codified it in this gradle plugin.
+
+This plugin is written for terraform 0.10.4. It will most likely work with 0.10.x versions, but 
+no guarantees are given. 
 
 ## How do I use it
 

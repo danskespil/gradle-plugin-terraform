@@ -99,4 +99,7 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 # End of https://www.gitignore.io/api/java,gradle,intellij+all
-/ds-gradle-plugin-terraform.iml
+
+
+*.iml
+

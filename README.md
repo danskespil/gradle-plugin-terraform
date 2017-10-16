@@ -2,7 +2,7 @@
 
 This plugin helps us, at Danske Spil, to use Hashicorps ```terraform``` for production and test systems.
 When we started using terraform, we just used the cli. However, soon we found that there is a workflow when we use terraform.
-One example is, that we save the textual output from.
+One example is, that we save the textual output from ```terraform plan``` for auditing purposes.
 
 This plugin is written for terraform 0.10.4. It will most likely work with 0.10.x versions, but 
 no guarantees are given. 
@@ -109,9 +109,12 @@ Join the party - write a test, code the functionality.
 ** ./gradlew test # Simple version
 ** ./gradlew --continuous --info test # Keep testing
 ** ./gradlew --continuous --info --tests dk.danskespil.gradle.plugins.terraform.PlanTest test # Keep testing a single test
+* Release, following ajoberstar plugin https://github.com/ajoberstar/gradle-git/wiki/Release%20Plugins
+** ./gradlew clean release -Prelease.scope=major_minor_OR_patch -Prelease.stage=final_OR_rc_OR_milestone_OR_dev
+** ./gradlew clean release // snapshot version
+** ./gradlew clean release -Prelease.scope=patch -Prelease.stage=dev // e.g. fiddling with readme
 *  Deployment
-** ./gradlew publish # SNAPSHOT
-** ./gradlew clean release publish -Prelease.scope=major_minor_OR_patch -Prelease.stage=final -Partifactory_plugins_repo=plugins-release -Partifactory_user=gatekeeper -Partifactory_password=***REMOVED*** # RELEASE
+** ./gradlew clean publishPlugins
 
 ## Contribution guidelines 
 

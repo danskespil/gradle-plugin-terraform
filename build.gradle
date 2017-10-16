@@ -92,4 +92,4 @@ pluginBundle {
 // Do not publish without testing
 publishPlugins.dependsOn check
 // Do not tag for release without testing
-release.dependsOn check
+tasks['release'].dependsOn check

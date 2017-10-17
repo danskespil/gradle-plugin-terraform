@@ -1,0 +1,6 @@
+language: java
+
+jobs:
+  include:
+    - stage: build
+      script: ./gradlew build

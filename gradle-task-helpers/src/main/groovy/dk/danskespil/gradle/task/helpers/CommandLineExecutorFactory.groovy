@@ -16,12 +16,12 @@ import org.gradle.api.Project
 class CommandLineExecutorFactory {
     private static Class executorClass
 
-    static AbstractDSCommandLineExecutor createExecutor(Project project) {
+    static AbstractCommandLineExecutor createExecutor(Project project) {
         if (!executorClass) {
             if (markerFileExistsInConventionallyNamedDir(project)) {
-                executorClass = DSCommandLineTestExecutor
+                executorClass = CommandLineTestExecutor
             } else {
-                executorClass = DSCommandLineExecutor
+                executorClass = CommandLineExecutor
             }
         }
         executorClass.newInstance([project:project])

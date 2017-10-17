@@ -3,10 +3,10 @@ package dk.danskespil.gradle.task.helpers
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 
-abstract class AbstractDSCommandLineExecutor {
+abstract class AbstractCommandLineExecutor {
     Project project
 
-    AbstractDSCommandLineExecutor(Project project) {
+    AbstractCommandLineExecutor(Project project) {
         this.project = project
     }
 

@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.helpers
 
-import dk.danskespil.test.helpers.commandlineexecutor.DSCommandLineExecutorFactory
+import dk.danskespil.test.helpers.commandlineexecutor.CommandLineExecutorFactory
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Unroll
@@ -20,7 +20,7 @@ class DSCommandLineExecutorTest extends DSSpecification {
                 .build()
 
         when:
-        def ex = DSCommandLineExecutorFactory.createExecutor(project)
+        def ex = CommandLineExecutorFactory.createExecutor(project)
 
         then:
         ex

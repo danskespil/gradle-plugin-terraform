@@ -13,7 +13,7 @@ import org.gradle.api.Project
  * If present, the factory is mocked`
  *
  */
-class DSCommandLineExecutorFactory {
+class CommandLineExecutorFactory {
     private static Class executorClass
 
     static AbstractDSCommandLineExecutor createExecutor(Project project) {

@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.helpers
 
-import dk.danskespil.test.helpers.commandlineexecutor.DSCommandLineExecutorFactory
+import dk.danskespil.test.helpers.commandlineexecutor.CommandLineExecutorFactory
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
@@ -31,7 +31,7 @@ class DSSpecification extends Specification {
     }
 
     private void setupTestStubsByAddingMarkerFilesToAConventionallyNamedDirectory() {
-        createNewPath("stubTheseFactories/${DSCommandLineExecutorFactory.getClass().getName()}")
+        createNewPath("stubTheseFactories/${CommandLineExecutorFactory.getClass().getName()}")
     }
 
     boolean exists(String path) {

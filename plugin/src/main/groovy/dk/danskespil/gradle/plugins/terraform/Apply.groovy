@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform
 
-import dk.danskespil.test.helpers.commandlineexecutor.DSCommandLineExecutorFactory
+import dk.danskespil.test.helpers.commandlineexecutor.CommandLineExecutorFactory
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
@@ -27,7 +27,7 @@ class Apply extends TerraformBaseTask {
             commandLine.addToEnd(plan.name)
         }
 
-        DSCommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
+        CommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
             e.commandLine this.commandLine
         })
     }

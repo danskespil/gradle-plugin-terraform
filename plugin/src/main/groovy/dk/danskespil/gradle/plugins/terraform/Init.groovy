@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform
 
-import dk.danskespil.test.helpers.commandlineexecutor.DSCommandLineExecutorFactory
+import dk.danskespil.test.helpers.commandlineexecutor.CommandLineExecutorFactory
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.OutputFiles
 import org.gradle.api.tasks.TaskAction
@@ -19,7 +19,7 @@ class Init extends TerraformBaseTask {
             return
         }
 
-        DSCommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
+        CommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
             e.commandLine this.commandLine
         })
     }

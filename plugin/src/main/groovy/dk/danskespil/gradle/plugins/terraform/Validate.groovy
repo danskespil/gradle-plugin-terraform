@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform
 
-import dk.danskespil.test.helpers.commandlineexecutor.DSCommandLineExecutorFactory
+import dk.danskespil.test.helpers.commandlineexecutor.CommandLineExecutorFactory
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputFiles
@@ -22,7 +22,7 @@ class Validate extends TerraformBaseTask {
     action() {
         commandLine.addToEnd('terraform', 'validate')
 
-        DSCommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
+        CommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
             e.commandLine this.commandLine
         })
     }

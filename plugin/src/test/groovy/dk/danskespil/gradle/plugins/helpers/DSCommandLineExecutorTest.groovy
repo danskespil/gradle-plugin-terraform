@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.helpers
 
-import dk.danskespil.test.helpers.dscommandlineexecutor.DSCommandLineExecutorFactory
+import dk.danskespil.test.helpers.commandlineexecutor.DSCommandLineExecutorFactory
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Unroll

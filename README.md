@@ -1,3 +1,5 @@
+[![Build Status master branch](https://travis-ci.org/jwermuth/gradle-plugin-terraform.svg?branch=master)](https://travis-ci.org/jwermuth/gradle-plugin-terraform)
+
 # What is this repository for? 
 
 This plugin helps us, at Danske Spil, to use Hashicorps ```terraform``` for production and test systems.

@@ -12,5 +12,4 @@ abstract class TerraformBaseTask extends DefaultTask {
 
     @Internal
     CommandLine commandLine = new CommandLine()
-
 }

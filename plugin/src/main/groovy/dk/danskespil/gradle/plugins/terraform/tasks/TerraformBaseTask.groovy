@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
-import dk.danskespil.gradle.plugins.terraform.plugin.CommandLine
+import dk.danskespil.gradle.task.helpers.CommandLine
 import dk.danskespil.gradle.task.helpers.AbstractCommandLineExecutor
 import dk.danskespil.gradle.task.helpers.CommandLineExecutorFactory
 import org.gradle.api.DefaultTask

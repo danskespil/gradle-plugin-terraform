@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.terraform.plugin
+package dk.danskespil.gradle.task.helpers
 
 /**
  * Apart from doing what an output stream does, this outputstream echos whatever it gets to the printstream its created with

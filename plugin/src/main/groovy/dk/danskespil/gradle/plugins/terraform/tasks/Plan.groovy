@@ -1,7 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
-import dk.danskespil.gradle.plugins.terraform.plugin.EchoOutputStream
-import dk.danskespil.gradle.task.helpers.CommandLineExecutorFactory
+import dk.danskespil.gradle.task.helpers.EchoOutputStream
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Optional

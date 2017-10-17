@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.terraform
+package dk.danskespil.gradle.plugins.terraform.tasks
 
 import dk.danskespil.gradle.plugins.helpers.DSSpecification
 import org.gradle.api.Project

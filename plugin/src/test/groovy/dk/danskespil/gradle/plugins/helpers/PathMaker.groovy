@@ -1,5 +1,6 @@
 package dk.danskespil.gradle.plugins.helpers
 
+import dk.danskespil.gradle.task.helpers.PathSlicer
 import org.junit.rules.TemporaryFolder
 
 /**

@@ -1,7 +1,7 @@
-package dk.danskespil.gradle.plugins
+package dk.danskespil.gradle.task.helpers
 
-import dk.danskespil.gradle.plugins.helpers.BadPathException
-import dk.danskespil.gradle.plugins.helpers.PathSlicer
+import dk.danskespil.gradle.task.helpers.BadPathException
+import dk.danskespil.gradle.task.helpers.PathSlicer
 import spock.lang.Specification
 import spock.lang.Unroll
 

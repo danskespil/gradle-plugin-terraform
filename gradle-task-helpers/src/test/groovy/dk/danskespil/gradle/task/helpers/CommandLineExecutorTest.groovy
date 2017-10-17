@@ -1,11 +1,20 @@
-package dk.danskespil.gradle.plugins.helpers
+package dk.danskespil.gradle.task.helpers
 
-import dk.danskespil.gradle.task.helpers.CommandLineExecutorFactory
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.Rule
+import org.junit.rules.TemporaryFolder
+import spock.lang.Specification
 import spock.lang.Unroll
 
-class CommandLineExecutorTest extends DSSpecification {
+class CommandLineExecutorTest extends Specification {
+    @Rule
+    final TemporaryFolder testProjectDir = new TemporaryFolder()
+    File buildFile
+
+    def setup() {
+        buildFile = testProjectDir.newFile('build.gradle')
+    }
 
     @Unroll
     def "As Custom Task I can use TestExecutor to fake execution of '#command' on the system I live on"() {

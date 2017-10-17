@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.helpers
+package dk.danskespil.gradle.task.helpers
 
 class BadPathException extends RuntimeException{
     BadPathException(String badInput) {

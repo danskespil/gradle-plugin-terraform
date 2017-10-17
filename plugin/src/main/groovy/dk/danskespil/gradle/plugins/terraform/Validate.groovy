@@ -1,11 +1,12 @@
 package dk.danskespil.gradle.plugins.terraform
 
-import dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor.DSCommandLineExecutorFactory
+import dk.danskespil.test.helpers.dscommandlineexecutor.DSCommandLineExecutorFactory
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputFiles
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecSpec
+
 /**
  * Wraps cli terraform validate
  */

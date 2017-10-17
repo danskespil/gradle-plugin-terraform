@@ -1,8 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform.plugin
 
 import dk.danskespil.gradle.plugins.helpers.DSSpecification
-import org.junit.Assert
-import org.spockframework.runtime.SpockAssertionError
 import spock.lang.FailsWith
 
 class TerraformCleanTest extends DSSpecification {

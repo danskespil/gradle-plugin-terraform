@@ -1,8 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
 import dk.danskespil.gradle.plugins.helpers.DSSpecification
-import org.gradle.api.Project
-import org.gradle.testfixtures.ProjectBuilder
 
 class ApplyTest extends DSSpecification {
     def "When calling custom terraform apply task, the executed commandline looks as expected"() {

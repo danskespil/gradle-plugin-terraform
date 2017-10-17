@@ -1,9 +1,12 @@
 package dk.danskespil.gradle.plugins.terraform
 
-import dk.danskespil.gradle.plugins.helpers.dscommandlineexecutor.DSCommandLineExecutorFactory
 import dk.danskespil.gradle.plugins.terraform.plugin.EchoOutputStream
+import dk.danskespil.test.helpers.dscommandlineexecutor.DSCommandLineExecutorFactory
 import org.gradle.api.file.FileCollection
-import org.gradle.api.tasks.*
+import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecSpec
 
 class Plan extends TerraformBaseTask

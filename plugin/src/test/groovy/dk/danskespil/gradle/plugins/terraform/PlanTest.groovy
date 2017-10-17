@@ -33,7 +33,7 @@ class PlanTest extends DSSpecification {
         Project project = ProjectBuilder.builder()
                 .withProjectDir(testProjectDir.root)
                 .build()
-        Plan cut = project.task('cut', type: Plan)
+        dk.danskespil.gradle.plugins.terraform.tasks.Plan cut = project.task('cut', type: dk.danskespil.gradle.plugins.terraform.tasks.Plan)
 
         then:
         project
@@ -50,7 +50,7 @@ class PlanTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan)
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan)
         """
 
         def fileWithMonitoredExtension = createNewPath("terraform.${extension}")
@@ -79,7 +79,7 @@ class PlanTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan)
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan)
         """
 
         // Simulate input file
@@ -113,7 +113,7 @@ class PlanTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
             out = file('plan-output.bin')
             doLast {
               // Since terraform is not executed during test, I am faking creation of the outputfile   

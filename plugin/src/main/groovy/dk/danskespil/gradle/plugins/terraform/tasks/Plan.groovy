@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.terraform
+package dk.danskespil.gradle.plugins.terraform.tasks
 
 import dk.danskespil.gradle.plugins.terraform.plugin.EchoOutputStream
 import dk.danskespil.gradle.task.helpers.CommandLineExecutorFactory
@@ -51,7 +51,7 @@ class Plan extends TerraformBaseTask
     @Override
     String getDescription() {
         return """wraps terraform plan. You can set -out='filename' with and get textual output into a file with out
-    task(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+    task(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
       out=file('output.bin')
       out=file('textversion.txt')
     }

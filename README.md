@@ -68,7 +68,7 @@ e.g. tfPlan writes textual output to plan-output by default, and the binary plan
 
 You can create custom version of the tasks like so
 ```text
-task myPlan(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+task myPlan(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
     out=file('my-better-bin-name.bin'
     outAsText=file('my-better-text-name.text'
 }

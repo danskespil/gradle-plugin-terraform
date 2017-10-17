@@ -10,7 +10,7 @@ class ApplyTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
   
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Apply)
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Apply)
         """
 
         when:
@@ -42,7 +42,7 @@ class ApplyTest extends DSSpecification {
             id 'dk.danskespil.gradle.plugins.terraform'
 
           }
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Apply) {
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Apply) {
             plan = file('plan.bin')
           }
         """

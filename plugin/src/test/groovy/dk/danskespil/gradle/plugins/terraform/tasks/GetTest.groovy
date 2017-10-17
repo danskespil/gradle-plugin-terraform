@@ -11,7 +11,7 @@ class GetTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Get)
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Get)
         """
 
         when:
@@ -28,7 +28,7 @@ class GetTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Get) {
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Get) {
             doLast {
               // Since terraform is not executed during test, I am faking creation of the outputfiles
               project.file('.terraform/').mkdir()

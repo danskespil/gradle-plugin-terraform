@@ -58,7 +58,7 @@ class PlanOutputTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          import dk.danskespil.gradle.plugins.terraform.Plan
+          import dk.danskespil.gradle.plugins.terraform.tasks.Plan
           task cut(type: Plan)
         """
 
@@ -76,7 +76,7 @@ class PlanOutputTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
 
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
              outAsText=file('plan-output')
           }
         """
@@ -97,7 +97,7 @@ class PlanOutputTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
 
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
              out=file('plan-output')
           }
         """
@@ -118,7 +118,7 @@ class PlanOutputTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
 
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
              outAsText=file('plan-output')
           }
         """
@@ -140,7 +140,7 @@ class PlanOutputTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
 
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Plan) {
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
              outAsText=file('plan-output')
           }
         """

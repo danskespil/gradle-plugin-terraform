@@ -12,7 +12,7 @@ class ValidateTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
 
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Validate)
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Validate)
         """
 
         when:
@@ -30,7 +30,7 @@ class ValidateTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
 
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Validate)
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Validate)
         """
         File monitoredFile = createNewPath(extensionExample) << "content"
         def build1 = buildWithTasks(':cut')

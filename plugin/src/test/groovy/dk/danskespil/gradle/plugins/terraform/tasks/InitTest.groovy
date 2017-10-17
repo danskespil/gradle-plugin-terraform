@@ -11,7 +11,7 @@ class InitTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Init)
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Init)
         """
 
         when:
@@ -29,7 +29,7 @@ class InitTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Init) {
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Init) {
             doLast {
               mkdir('.terraform')
               file('.terraform/terraform.tfstate').createNewFile()
@@ -53,7 +53,7 @@ class InitTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Init) {
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Init) {
             doLast {
               mkdir('.terraform')
               file('.terraform/terraform.tfstate').createNewFile()
@@ -77,7 +77,7 @@ class InitTest extends DSSpecification {
               id 'dk.danskespil.gradle.plugins.terraform'
           }
           
-          task cut(type: dk.danskespil.gradle.plugins.terraform.Init) {
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Init) {
             doLast {
               mkdir('.terraform')
               file('.terraform/terraform.tfstate').createNewFile()

@@ -1,6 +1,10 @@
 package dk.danskespil.gradle.plugins.terraform.plugin
 
-import dk.danskespil.gradle.plugins.terraform.*
+import dk.danskespil.gradle.plugins.terraform.tasks.Apply
+import dk.danskespil.gradle.plugins.terraform.tasks.Get
+import dk.danskespil.gradle.plugins.terraform.tasks.Init
+import dk.danskespil.gradle.plugins.terraform.tasks.Plan
+import dk.danskespil.gradle.plugins.terraform.tasks.Validate
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task

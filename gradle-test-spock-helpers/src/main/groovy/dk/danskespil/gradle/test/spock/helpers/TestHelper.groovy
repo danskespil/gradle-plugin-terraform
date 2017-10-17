@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.helpers
+package dk.danskespil.gradle.test.spock.helpers
 
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner

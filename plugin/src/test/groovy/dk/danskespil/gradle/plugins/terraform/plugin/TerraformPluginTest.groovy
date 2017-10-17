@@ -1,8 +1,8 @@
 package dk.danskespil.gradle.plugins.terraform.plugin
 
-import dk.danskespil.gradle.plugins.helpers.DSSpecification
 import dk.danskespil.gradle.plugins.terraform.tasks.Get
 import dk.danskespil.gradle.plugins.terraform.tasks.Plan
+import dk.danskespil.gradle.test.spock.helpers.DSSpecification
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder

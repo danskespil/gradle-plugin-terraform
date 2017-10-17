@@ -1,4 +1,4 @@
-package dk.danskespil.gradle.plugins.helpers
+package dk.danskespil.gradle.test.spock.helpers
 
 import dk.danskespil.gradle.task.helpers.CommandLineExecutorFactory
 import org.junit.Rule

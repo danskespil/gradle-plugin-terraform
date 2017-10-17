@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
-import dk.danskespil.gradle.plugins.helpers.DSSpecification
+import dk.danskespil.gradle.test.spock.helpers.DSSpecification
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.TaskOutcome

@@ -1,3 +1,5 @@
 include 'plugin'
 // Allow sub project to be called 'plugin' and the artifact to be called gradle-plugin-terraform-xxx.jar
 project(":plugin").name = "gradle-plugin-terraform"
+
+include 'test-helpers-spock'

@@ -1,4 +1,4 @@
-package dk.danskespil.test.helpers.commandlineexecutor
+package dk.danskespil.gradle.task.helpers
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project

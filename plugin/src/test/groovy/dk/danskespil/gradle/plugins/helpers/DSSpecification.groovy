@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.plugins.helpers
 
-import dk.danskespil.test.helpers.commandlineexecutor.CommandLineExecutorFactory
+import dk.danskespil.gradle.task.helpers.CommandLineExecutorFactory
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification

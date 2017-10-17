@@ -14,7 +14,7 @@ class Get extends TerraformBaseTask {
     action() {
         commandLine.addToEnd('terraform', 'get')
 
-        CommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
+        executor.executeExecSpec(this, { ExecSpec e ->
             e.commandLine this.commandLine
         })
     }

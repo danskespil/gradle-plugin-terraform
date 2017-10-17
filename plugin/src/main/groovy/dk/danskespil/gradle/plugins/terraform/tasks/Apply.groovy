@@ -27,7 +27,7 @@ class Apply extends TerraformBaseTask {
             commandLine.addToEnd(plan.name)
         }
 
-        CommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
+        executor.executeExecSpec(this, { ExecSpec e ->
             e.commandLine this.commandLine
         })
     }

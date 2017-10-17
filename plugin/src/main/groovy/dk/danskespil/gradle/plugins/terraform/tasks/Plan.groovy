@@ -41,7 +41,7 @@ class Plan extends TerraformBaseTask
         }
 
         echoOutputHereToo.withStream { os ->
-            CommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
+            executor.executeExecSpec(this, { ExecSpec e ->
                 e.commandLine this.commandLine
                 e.standardOutput = os
             })

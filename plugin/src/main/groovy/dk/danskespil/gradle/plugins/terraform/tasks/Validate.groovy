@@ -22,7 +22,7 @@ class Validate extends TerraformBaseTask {
     action() {
         commandLine.addToEnd('terraform', 'validate')
 
-        CommandLineExecutorFactory.createExecutor(project).executeExecSpec(this, { ExecSpec e ->
+        executor.executeExecSpec(this, { ExecSpec e ->
             e.commandLine this.commandLine
         })
     }

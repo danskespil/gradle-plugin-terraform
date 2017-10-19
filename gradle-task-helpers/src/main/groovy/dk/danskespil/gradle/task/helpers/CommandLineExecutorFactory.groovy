@@ -1,6 +1,7 @@
 package dk.danskespil.gradle.task.helpers
 
 import org.gradle.api.Project
+
 /**
  * Allows creation of test services/mocks/stubs by examining the filesystem for files under
  *
@@ -18,16 +19,34 @@ class CommandLineExecutorFactory {
 
     static AbstractCommandLineExecutor createExecutor(Project project) {
         if (!executorClass) {
-            if (markerFileExistsInConventionallyNamedDir(project)) {
+            if (isUnderTest()) {
                 executorClass = CommandLineTestExecutor
             } else {
                 executorClass = CommandLineExecutor
             }
         }
-        executorClass.newInstance([project:project])
+        executorClass.newInstance([project: project])
     }
 
-    private static boolean markerFileExistsInConventionallyNamedDir(Project project) {
-        return project.file("stubTheseFactories/${getClass().getName()}").exists()
+    static void setIsUnderTest(boolean isUnderTest) {
+        if (notCurrentlyUnderTest()) {
+            new File("stubTheseFactories").mkdir()
+            boolean success = getMarkerFile().createNewFile()
+            if (!success) {
+                throw new RuntimeException("Unable to create test marker file '${markerFile.getAbsolutePath()}'.")
+            }
+        }
+    }
+
+    static boolean isUnderTest() {
+        return getMarkerFile().exists()
+    }
+
+    static private boolean notCurrentlyUnderTest() {
+        return !isUnderTest()
+    }
+
+    static private getMarkerFile() {
+        return new File("stubTheseFactories/${this.name}")
     }
 }

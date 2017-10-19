@@ -22,7 +22,7 @@ class DSSpecification extends Specification {
     def setup() {
         buildFile = testProjectDir.newFile('build.gradle')
         testHelper.testProjectDir = testProjectDir
-        setupTestStubsByAddingMarkerFilesToAConventionallyNamedDirectory()
+        setupTestStubsByAddingMarkerFilesToAConventionNamedDirectory()
     }
 
     // Easy creation of deep paths with or without files 'at the end'
@@ -30,8 +30,8 @@ class DSSpecification extends Specification {
         pathMaker.createNewPath(testProjectDir, path)
     }
 
-    private void setupTestStubsByAddingMarkerFilesToAConventionallyNamedDirectory() {
-        createNewPath("stubTheseFactories/${CommandLineExecutorFactory.getClass().getName()}")
+    private void setupTestStubsByAddingMarkerFilesToAConventionNamedDirectory() {
+        CommandLineExecutorFactory.setIsUnderTest(true)
     }
 
     boolean exists(String path) {

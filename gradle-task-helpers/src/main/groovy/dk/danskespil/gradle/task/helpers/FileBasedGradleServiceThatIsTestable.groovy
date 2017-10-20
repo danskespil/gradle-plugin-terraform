@@ -14,6 +14,7 @@ import org.gradle.api.Project
  * If present, the factory is mocked. Mocked means that
  *
  */
+@Singleton
 class FileBasedGradleServiceThatIsTestable extends AbstractGradleServiceThatIsTestable {
     private Class executorClass
 

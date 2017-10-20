@@ -31,7 +31,7 @@ class DSSpecification extends Specification {
     }
 
     private void setupTestStubsByAddingMarkerFilesToAConventionNamedDirectory() {
-        new FileBasedGradleServiceThatIsTestable().setIsUnderTest(true)
+        FileBasedGradleServiceThatIsTestable.instance.setIsUnderTest(true)
     }
 
     boolean exists(String path) {

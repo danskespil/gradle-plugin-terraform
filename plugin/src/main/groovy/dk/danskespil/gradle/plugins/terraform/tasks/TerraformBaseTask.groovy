@@ -15,5 +15,5 @@ abstract class TerraformBaseTask extends DefaultTask {
     @Internal
     CommandLine commandLine = new CommandLine()
     @Internal
-    AbstractGradleServiceCommandlineExecutor executor = GradleServiceCommandlineExecutor.createService(project)
+    AbstractGradleServiceCommandlineExecutor executor = new GradleServiceCommandlineExecutor().createService(project)
 }

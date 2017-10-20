@@ -15,9 +15,9 @@ import org.gradle.api.Project
  *
  */
 class GradleServiceCommandlineExecutor implements GradleServiceThatIsTestable {
-    private static Class executorClass
+    private Class executorClass
 
-    static AbstractGradleServiceCommandlineExecutor createService(Project project) {
+    AbstractGradleServiceCommandlineExecutor createService(Project project) {
         if (!executorClass) {
             if (isUnderTest()) {
                 executorClass = CommandLineTestExecutor
@@ -28,9 +28,9 @@ class GradleServiceCommandlineExecutor implements GradleServiceThatIsTestable {
         executorClass.newInstance([project: project])
     }
 
-    static void setIsUnderTest(boolean isUnderTest) {
+    void setIsUnderTest(boolean isUnderTest) {
         if (notCurrentlyUnderTest()) {
-            new File("stubTheseFactories").mkdir()
+            new File("build/stubTheseFactories").mkdirs()
             boolean success = getMarkerFile().createNewFile()
             if (!success) {
                 throw new RuntimeException("Unable to create test marker file '${markerFile.getAbsolutePath()}'.")
@@ -38,15 +38,15 @@ class GradleServiceCommandlineExecutor implements GradleServiceThatIsTestable {
         }
     }
 
-    static boolean isUnderTest() {
+    boolean isUnderTest() {
         return getMarkerFile().exists()
     }
 
-    static private boolean notCurrentlyUnderTest() {
+    private boolean notCurrentlyUnderTest() {
         return !isUnderTest()
     }
 
-    static private getMarkerFile() {
-        return new File("stubTheseFactories/${this.name}")
+    private getMarkerFile() {
+        return new File("build/stubTheseFactories/${this.getClass().getName()}")
     }
 }

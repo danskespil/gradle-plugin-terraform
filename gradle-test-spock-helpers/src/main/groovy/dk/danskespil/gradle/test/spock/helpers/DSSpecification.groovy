@@ -31,7 +31,7 @@ class DSSpecification extends Specification {
     }
 
     private void setupTestStubsByAddingMarkerFilesToAConventionNamedDirectory() {
-        GradleServiceCommandlineExecutor.setIsUnderTest(true)
+        new GradleServiceCommandlineExecutor().setIsUnderTest(true)
     }
 
     boolean exists(String path) {

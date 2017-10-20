@@ -9,12 +9,12 @@ import org.gradle.api.Project
  *
  * For a file named
  *
- * PROJECT_ROOT/stubTheseFactories/ExecutorFactory
+ * PROJECT_ROOT/stubTheseFactories/FULLYQUALIFIEDNAME
  *
  * If present, the factory is mocked`
  *
  */
-class CommandLineExecutorFactory {
+class CommandLineExecutorFactory implements GradleServiceThatIsTestable {
     private static Class executorClass
 
     static AbstractCommandLineExecutor createExecutor(Project project) {

@@ -5,16 +5,16 @@ import org.gradle.api.Project
 /**
  * Allows creation of test services/mocks/stubs by examining the filesystem for files under
  *
- * PROJECT_ROOT/stubTheseFactories/
+ * PROJECT_ROOT/build/stubTheseFactories/
  *
  * For a file named
  *
- * PROJECT_ROOT/stubTheseFactories/FULLYQUALIFIEDNAME
+ * PROJECT_ROOT/build/stubTheseFactories/FULLYQUALIFIEDNAME
  *
- * If present, the factory is mocked`
+ * If present, the factory is mocked. Mocked means that
  *
  */
-class GradleServiceCommandlineExecutor implements GradleServiceThatIsTestable {
+class FileBasedGradleServiceThatIsTestable extends AbstractGradleServiceThatIsTestable {
     private Class executorClass
 
     AbstractGradleServiceCommandlineExecutor createService(Project project) {
@@ -26,27 +26,5 @@ class GradleServiceCommandlineExecutor implements GradleServiceThatIsTestable {
             }
         }
         executorClass.newInstance([project: project])
-    }
-
-    void setIsUnderTest(boolean isUnderTest) {
-        if (notCurrentlyUnderTest()) {
-            new File("build/stubTheseFactories").mkdirs()
-            boolean success = getMarkerFile().createNewFile()
-            if (!success) {
-                throw new RuntimeException("Unable to create test marker file '${markerFile.getAbsolutePath()}'.")
-            }
-        }
-    }
-
-    boolean isUnderTest() {
-        return getMarkerFile().exists()
-    }
-
-    private boolean notCurrentlyUnderTest() {
-        return !isUnderTest()
-    }
-
-    private getMarkerFile() {
-        return new File("build/stubTheseFactories/${this.getClass().getName()}")
     }
 }

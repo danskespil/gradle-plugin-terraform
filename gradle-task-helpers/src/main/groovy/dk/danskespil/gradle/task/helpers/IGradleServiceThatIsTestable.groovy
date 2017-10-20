@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.task.helpers
 
-interface GradleServiceThatIsTestable {
+interface IGradleServiceThatIsTestable {
     void setIsUnderTest(boolean isUnderTest)
     boolean isUnderTest()
 }

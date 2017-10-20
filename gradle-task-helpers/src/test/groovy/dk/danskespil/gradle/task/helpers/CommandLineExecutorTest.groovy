@@ -19,7 +19,7 @@ class CommandLineExecutorTest extends DSSpecification {
                 .build()
 
         when:
-        def ex = CommandLineExecutorFactory.createExecutor(project)
+        def ex = GradleServiceCommandlineExecutor.createService(project)
 
         then:
         ex

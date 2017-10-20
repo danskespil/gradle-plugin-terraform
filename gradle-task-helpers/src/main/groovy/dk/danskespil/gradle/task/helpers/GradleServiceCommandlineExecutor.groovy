@@ -14,10 +14,10 @@ import org.gradle.api.Project
  * If present, the factory is mocked`
  *
  */
-class CommandLineExecutorFactory implements GradleServiceThatIsTestable {
+class GradleServiceCommandlineExecutor implements GradleServiceThatIsTestable {
     private static Class executorClass
 
-    static AbstractCommandLineExecutor createExecutor(Project project) {
+    static AbstractGradleServiceCommandlineExecutor createService(Project project) {
         if (!executorClass) {
             if (isUnderTest()) {
                 executorClass = CommandLineTestExecutor

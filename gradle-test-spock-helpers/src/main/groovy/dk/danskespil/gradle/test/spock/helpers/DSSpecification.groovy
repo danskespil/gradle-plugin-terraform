@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.test.spock.helpers
 
-import dk.danskespil.gradle.task.helpers.CommandLineExecutorFactory
+import dk.danskespil.gradle.task.helpers.GradleServiceCommandlineExecutor
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
@@ -31,7 +31,7 @@ class DSSpecification extends Specification {
     }
 
     private void setupTestStubsByAddingMarkerFilesToAConventionNamedDirectory() {
-        CommandLineExecutorFactory.setIsUnderTest(true)
+        GradleServiceCommandlineExecutor.setIsUnderTest(true)
     }
 
     boolean exists(String path) {

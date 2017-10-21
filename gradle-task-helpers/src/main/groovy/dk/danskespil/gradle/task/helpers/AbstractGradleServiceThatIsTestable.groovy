@@ -2,8 +2,8 @@ package dk.danskespil.gradle.task.helpers
 
 import org.gradle.api.Project
 
-abstract class AbstractGradleServiceThatIsTestable implements IGradleServiceThatIsTestable {
-    abstract Object createService(Project project)
+abstract class AbstractGradleServiceThatIsTestable<S> implements IGradleServiceThatIsTestable {
+    abstract S createService(Project project)
 
     void setIsUnderTest(boolean isUnderTest) {
         if (notCurrentlyUnderTest()) {

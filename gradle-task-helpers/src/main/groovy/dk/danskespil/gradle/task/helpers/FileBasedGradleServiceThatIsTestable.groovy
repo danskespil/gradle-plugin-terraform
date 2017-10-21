@@ -15,7 +15,7 @@ import org.gradle.api.Project
  *
  */
 @Singleton
-class FileBasedGradleServiceThatIsTestable extends AbstractGradleServiceThatIsTestable {
+class FileBasedGradleServiceThatIsTestable extends AbstractGradleServiceThatIsTestable<AbstractGradleServiceCommandlineExecutor> {
     private Class executorClass
 
     AbstractGradleServiceCommandlineExecutor createService(Project project) {

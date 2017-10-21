@@ -3,8 +3,8 @@ package dk.danskespil.gradle.task.helpers
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 
-class CommandLineTestExecutor extends AbstractGradleServiceCommandlineExecutor {
-    CommandLineTestExecutor(Project project) {
+class ExecuteOnOSStub extends GradleServiceExecuteOnOS {
+    ExecuteOnOSStub(Project project) {
         super(project)
     }
 

@@ -1,6 +1,6 @@
 package dk.danskespil.gradle.test.spock.helpers
 
-import dk.danskespil.gradle.task.helpers.FileBasedGradleServiceThatIsTestable
+import dk.danskespil.gradle.task.helpers.GradleServiceExecuteOnOSFactory
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
@@ -31,7 +31,7 @@ class DSSpecification extends Specification {
     }
 
     private void setupTestStubsByAddingMarkerFilesToAConventionNamedDirectory() {
-        FileBasedGradleServiceThatIsTestable.instance.setIsUnderTest(true)
+        GradleServiceExecuteOnOSFactory.instance.enableStub()
     }
 
     boolean exists(String path) {

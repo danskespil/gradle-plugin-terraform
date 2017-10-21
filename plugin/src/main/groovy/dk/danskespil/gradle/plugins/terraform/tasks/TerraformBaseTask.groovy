@@ -1,8 +1,8 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
-import dk.danskespil.gradle.task.helpers.AbstractGradleServiceCommandlineExecutor
+import dk.danskespil.gradle.task.helpers.GradleServiceExecuteOnOS
 import dk.danskespil.gradle.task.helpers.CommandLine
-import dk.danskespil.gradle.task.helpers.FileBasedGradleServiceThatIsTestable
+import dk.danskespil.gradle.task.helpers.GradleServiceExecuteOnOSFactory
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Internal
 
@@ -15,5 +15,5 @@ abstract class TerraformBaseTask extends DefaultTask {
     @Internal
     CommandLine commandLine = new CommandLine()
     @Internal
-    AbstractGradleServiceCommandlineExecutor executor = FileBasedGradleServiceThatIsTestable.instance.createService(project)
+    GradleServiceExecuteOnOS executor = GradleServiceExecuteOnOSFactory.instance.createService(project)
 }

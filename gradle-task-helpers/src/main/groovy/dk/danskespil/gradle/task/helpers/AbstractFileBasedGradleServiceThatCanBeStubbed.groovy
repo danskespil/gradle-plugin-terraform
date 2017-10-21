@@ -2,10 +2,24 @@ package dk.danskespil.gradle.task.helpers
 
 import org.gradle.api.Project
 
-abstract class AbstractGradleServiceThatIsTestable<S> implements IGradleServiceThatIsTestable {
+/*
+ * Allows creation of test stubs by examining the filesystem for files under
+ *
+ * PROJECT_ROOT/build/stubTheseFactories/
+ *
+ * For a file named
+ *
+ * PROJECT_ROOT/build/stubTheseFactories/FULLYQUALIFIEDNAME
+ *
+ * If present, the factory is stubbed. Stubbed means that it can be called in a controlled manner from a test.
+ * In the case of this stub, calling it will echo out what would be have been executed.
+ *
+ */
+
+abstract class  AbstractFileBasedGradleServiceThatCanBeStubbed<S> implements IGradleServiceThatCanBeStubbed {
     abstract S createService(Project project)
 
-    void setIsUnderTest(boolean isUnderTest) {
+    void enableStub() {
         if (notCurrentlyUnderTest()) {
             new File("build/stubTheseFactories").mkdirs()
             boolean success = getMarkerFile().createNewFile()
@@ -15,12 +29,12 @@ abstract class AbstractGradleServiceThatIsTestable<S> implements IGradleServiceT
         }
     }
 
-    boolean isUnderTest() {
+    boolean isStubbed() {
         return getMarkerFile().exists()
     }
 
     private boolean notCurrentlyUnderTest() {
-        return !isUnderTest()
+        return !isStubbed()
     }
 
     private getMarkerFile() {

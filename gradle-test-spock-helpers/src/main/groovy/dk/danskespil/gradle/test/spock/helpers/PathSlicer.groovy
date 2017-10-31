@@ -1,4 +1,6 @@
-package dk.danskespil.gradle.task.helpers
+package dk.danskespil.gradle.test.spock.helpers
+
+import dk.danskespil.gradle.task.helpers.BadPathException
 
 /**
  * Helper to make it easier to create nested filestructures with TemporaryFolder

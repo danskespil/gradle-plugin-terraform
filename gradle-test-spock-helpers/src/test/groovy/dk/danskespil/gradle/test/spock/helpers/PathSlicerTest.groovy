@@ -1,7 +1,6 @@
-package dk.danskespil.gradle.task.helpers
+package dk.danskespil.gradle.test.spock.helpers
 
 import dk.danskespil.gradle.task.helpers.BadPathException
-import dk.danskespil.gradle.task.helpers.PathSlicer
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -28,10 +27,10 @@ class PathSlicerTest extends Specification {
 
         // http://spockframework.org/spock/docs/1.1/data_driven_testing.html
         where:
-        path      | nofDirs
-        'a/'      |    1
-        'a/b/'    |    2
-        'a/b/c'   |    2
+        path    | nofDirs
+        'a/'    | 1
+        'a/b/'  | 2
+        'a/b/c' | 2
     }
 
     @Unroll
@@ -44,10 +43,10 @@ class PathSlicerTest extends Specification {
 
         // http://spockframework.org/spock/docs/1.1/data_driven_testing.html
         where:
-        path    |  fileName
-        'a'     |     'a'
-        'a/gg'  |     'gg'
-        'a/b.c' |     'b.c'
+        path    | fileName
+        'a'     | 'a'
+        'a/gg'  | 'gg'
+        'a/b.c' | 'b.c'
     }
 
     def "When creating a nested file, I need to access the full path originally given to pathSlicer"() {
@@ -66,7 +65,7 @@ class PathSlicerTest extends Specification {
         !cut.fileName
     }
 
-    def "To make it easier to operate TemporaryFolder, I want to access the dirs as a list of Strings" () {
+    def "To make it easier to operate TemporaryFolder, I want to access the dirs as a list of Strings"() {
         when:
         PathSlicer cut = new PathSlicer('a/b/')
 

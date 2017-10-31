@@ -34,7 +34,7 @@ class TemporaryFolderSpecification extends Specification {
         GradleServiceExecuteOnOSFactory.instance.enableStub()
     }
 
-    boolean exists(String path) {
+    boolean existsInTemporaryFolder(String path) {
         if (!path.startsWith(File.separator)) {
             path += File.pathSeparator + path
         }

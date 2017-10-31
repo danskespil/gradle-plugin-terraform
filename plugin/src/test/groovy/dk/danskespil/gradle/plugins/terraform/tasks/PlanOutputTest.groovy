@@ -33,7 +33,7 @@ class PlanOutputTest extends TemporaryFolderSpecification {
         def result = buildWithTasks('tfPlan')
 
         then:
-        exists('/plan-output')
+        existsInTemporaryFolder('/plan-output')
     }
 
     def "plan task provided by plugin writes to stdout by default"() {
@@ -129,7 +129,7 @@ class PlanOutputTest extends TemporaryFolderSpecification {
         then:
         result
         result.task(':cut').outcome == TaskOutcome.SUCCESS
-        exists("/plan-output")
+        existsInTemporaryFolder("/plan-output")
         file("/plan-output").text.contains('terraform plan')
     }
 

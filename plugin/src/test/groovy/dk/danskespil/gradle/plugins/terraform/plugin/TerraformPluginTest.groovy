@@ -111,7 +111,7 @@ class TerraformPluginTest extends TemporaryFolderSpecification {
           }
         """
         buildWithTasks('tfPlan')
-        def planOutputExistsAfterPlanTaskIsRun = exists('/plan-output')
+        def planOutputExistsAfterPlanTaskIsRun = existsInTemporaryFolder('/plan-output')
 
         when:
         def build2 = buildWithTasks('clean')

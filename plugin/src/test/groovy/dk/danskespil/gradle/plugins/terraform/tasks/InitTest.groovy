@@ -1,9 +1,9 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
-import dk.danskespil.gradle.test.spock.helpers.TemporaryFolderSpecification
+import dk.danskespil.gradle.plugins.helpers.BaseSpecification
 import org.gradle.testkit.runner.TaskOutcome
 
-class InitTest extends TemporaryFolderSpecification {
+class InitTest extends BaseSpecification {
     def "init can be called"() {
         given:
         buildFile << """

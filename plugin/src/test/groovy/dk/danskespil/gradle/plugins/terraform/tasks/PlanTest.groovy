@@ -1,12 +1,12 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
-import dk.danskespil.gradle.test.spock.helpers.TemporaryFolderSpecification
+import dk.danskespil.gradle.plugins.helpers.BaseSpecification
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.TaskOutcome
 import spock.lang.Unroll
 
-class PlanTest extends TemporaryFolderSpecification {
+class PlanTest extends BaseSpecification {
 // This is what we are coding against:
 //    task plan {
 //  Implemented      inputs.files fileTree("$projectDir").include('*.tf')

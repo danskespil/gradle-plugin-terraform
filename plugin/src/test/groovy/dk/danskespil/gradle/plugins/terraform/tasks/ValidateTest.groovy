@@ -1,10 +1,10 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
-import dk.danskespil.gradle.test.spock.helpers.TemporaryFolderSpecification
+import dk.danskespil.gradle.plugins.helpers.BaseSpecification
 import org.gradle.testkit.runner.TaskOutcome
 import spock.lang.Unroll
 
-class ValidateTest extends TemporaryFolderSpecification {
+class ValidateTest extends BaseSpecification {
     def "When calling custom terraform task, the executed commandline looks as expected"() {
         given:
         buildFile << """

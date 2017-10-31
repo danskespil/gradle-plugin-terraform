@@ -1,8 +1,8 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
-import dk.danskespil.gradle.test.spock.helpers.TemporaryFolderSpecification
+import dk.danskespil.gradle.plugins.helpers.BaseSpecification
 
-class ApplyTest extends TemporaryFolderSpecification {
+class ApplyTest extends BaseSpecification {
     def "When calling custom terraform apply task, the executed commandline looks as expected"() {
         given:
         buildFile << """

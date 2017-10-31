@@ -1,9 +1,9 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
-import dk.danskespil.gradle.test.spock.helpers.TemporaryFolderSpecification
+import dk.danskespil.gradle.plugins.helpers.BaseSpecification
 import org.gradle.testkit.runner.TaskOutcome
 
-class GetTest extends TemporaryFolderSpecification {
+class GetTest extends BaseSpecification {
     def "when no modules are present, task is called"() {
         given:
         buildFile << """

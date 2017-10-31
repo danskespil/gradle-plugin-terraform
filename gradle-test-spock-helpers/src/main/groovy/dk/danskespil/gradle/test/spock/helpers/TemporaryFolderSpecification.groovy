@@ -41,7 +41,7 @@ class TemporaryFolderSpecification extends Specification {
         return new File(testProjectDir.root.absolutePath + "${path}").exists()
     }
 
-    File file(String path) {
+    File fileInTemporaryFolder(String path) {
         if (!path.startsWith(File.separator)) {
             path += File.pathSeparator + path
         }

@@ -41,7 +41,7 @@ class GetTest extends TemporaryFolderSpecification {
         def build2 = buildWithTasks('cut')
 
         when:
-        file("/.terraform/modules").deleteDir()
+        fileInTemporaryFolder("/.terraform/modules").deleteDir()
         def build3 = buildWithTasks('cut')
 
         then:

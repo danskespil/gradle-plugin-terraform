@@ -130,7 +130,7 @@ class PlanOutputTest extends TemporaryFolderSpecification {
         result
         result.task(':cut').outcome == TaskOutcome.SUCCESS
         existsInTemporaryFolder("/plan-output")
-        file("/plan-output").text.contains('terraform plan')
+        fileInTemporaryFolder("/plan-output").text.contains('terraform plan')
     }
 
     def "only when file with textual output is deleted, custom plan task its rebuild"() {
@@ -148,7 +148,7 @@ class PlanOutputTest extends TemporaryFolderSpecification {
         when:
         def build1 = buildWithTasks('cut')
         def build2 = buildWithTasks('cut')
-        file('/plan-output').delete()
+        fileInTemporaryFolder('/plan-output').delete()
         def build3 = buildWithTasks('cut')
 
         then:

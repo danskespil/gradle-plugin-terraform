@@ -4,6 +4,7 @@ import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.rules.TemporaryFolder
 
+// Shorthands for building a gradle project when testing
 class TestHelper {
     TemporaryFolder testProjectDir
 

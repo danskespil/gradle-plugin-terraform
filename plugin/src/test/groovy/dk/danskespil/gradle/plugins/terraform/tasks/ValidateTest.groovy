@@ -32,7 +32,7 @@ class ValidateTest extends TemporaryFolderSpecification {
 
           task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Validate)
         """
-        File monitoredFile = createNewPath(extensionExample) << "content"
+        File monitoredFile = createPathInTemporaryFolder(extensionExample) << "content"
         def build1 = buildWithTasks(':cut')
 
         when:

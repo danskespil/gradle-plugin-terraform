@@ -46,7 +46,7 @@ class ApplyTest extends TemporaryFolderSpecification {
             plan = file('plan.bin')
           }
         """
-        createNewPath('plan.bin') << "binary-content"
+        createPathInTemporaryFolder('plan.bin') << "binary-content"
 
         when:
         def build = buildWithTasks(':cut')

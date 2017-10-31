@@ -1,6 +1,5 @@
 package dk.danskespil.gradle.test.spock.helpers
 
-import dk.danskespil.gradle.task.helpers.GradleServiceExecuteOnOSFactory
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
@@ -22,16 +21,11 @@ class TemporaryFolderSpecification extends Specification {
     def setup() {
         buildFile = testProjectDir.newFile('build.gradle')
         testHelper.testProjectDir = testProjectDir
-        setupTestStubsByAddingMarkerFilesToAConventionNamedDirectory()
     }
 
     // Easy creation of deep paths with or without files 'at the end'
-    File createNewPath(String path) {
+    File createPathInTemporaryFolder(String path) {
         pathMaker.createNewPath(testProjectDir, path)
-    }
-
-    private void setupTestStubsByAddingMarkerFilesToAConventionNamedDirectory() {
-        GradleServiceExecuteOnOSFactory.instance.enableStub()
     }
 
     boolean existsInTemporaryFolder(String path) {

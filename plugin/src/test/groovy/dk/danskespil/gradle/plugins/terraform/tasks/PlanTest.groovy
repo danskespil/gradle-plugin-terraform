@@ -26,8 +26,8 @@ class PlanTest extends TemporaryFolderSpecification {
 
     def "Plan picks up any .tf and .tpl files"() {
         given:
-        createNewPath('terraform1.tf')
-        createNewPath('terraform2.tpl')
+        createPathInTemporaryFolder('terraform1.tf')
+        createPathInTemporaryFolder('terraform2.tpl')
 
         when:
         Project project = ProjectBuilder.builder()
@@ -53,7 +53,7 @@ class PlanTest extends TemporaryFolderSpecification {
           task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan)
         """
 
-        def fileWithMonitoredExtension = createNewPath("terraform.${extension}")
+        def fileWithMonitoredExtension = createPathInTemporaryFolder("terraform.${extension}")
 
         when:
         def build1 = buildWithTasks('cut')
@@ -83,7 +83,7 @@ class PlanTest extends TemporaryFolderSpecification {
         """
 
         // Simulate input file
-        File simulatedInputFile = createNewPath(inputfile)
+        File simulatedInputFile = createPathInTemporaryFolder(inputfile)
         simulatedInputFile << "simulated content"
 
         when:
@@ -123,7 +123,7 @@ class PlanTest extends TemporaryFolderSpecification {
         """
 
         // Simulate input file
-        File simulatedInputFile = createNewPath('terraform.tf')
+        File simulatedInputFile = createPathInTemporaryFolder('terraform.tf')
 
         simulatedInputFile << "simulated content"
 

@@ -86,7 +86,7 @@ class InitTest extends TemporaryFolderSpecification {
         """
 
         when:
-        File stateFile = createNewPath('.terraform/terraform.tfstate')
+        File stateFile = createPathInTemporaryFolder('.terraform/terraform.tfstate')
         def build1 = buildWithTasks(':cut')
         addSomethingToTheFile(stateFile)
         def build2 = buildWithTasks(':cut')

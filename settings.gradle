@@ -3,4 +3,3 @@ include 'plugin'
 project(":plugin").name = "gradle-plugin-terraform"
 
 include 'gradle-task-helpers'
-include 'gradle-test-spock-helpers'

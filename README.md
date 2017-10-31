@@ -121,6 +121,8 @@ Join the party - write a test, code the functionality.
 * Jesper Wermuth wermuth@lundogbendsen.dk
  
 # Versions
+## 0.0.5
+* Internal refactoring
 
 ## 0.0.4-SNAPSHOT
 * documentation on tfGet 

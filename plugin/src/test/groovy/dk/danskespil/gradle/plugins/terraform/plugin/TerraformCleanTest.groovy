@@ -1,9 +1,9 @@
 package dk.danskespil.gradle.plugins.terraform.plugin
 
-import dk.danskespil.gradle.test.spock.helpers.DSSpecification
+import dk.danskespil.gradle.test.spock.helpers.TemporaryFolderSpecification
 import spock.lang.FailsWith
 
-class TerraformCleanTest extends DSSpecification {
+class TerraformCleanTest extends TemporaryFolderSpecification {
     def "Clean is only executed when there are files to delete"() {
     }
 

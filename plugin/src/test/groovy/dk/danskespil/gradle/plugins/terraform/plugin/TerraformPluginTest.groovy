@@ -2,14 +2,14 @@ package dk.danskespil.gradle.plugins.terraform.plugin
 
 import dk.danskespil.gradle.plugins.terraform.tasks.Get
 import dk.danskespil.gradle.plugins.terraform.tasks.Plan
-import dk.danskespil.gradle.test.spock.helpers.DSSpecification
+import dk.danskespil.gradle.test.spock.helpers.TemporaryFolderSpecification
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.TaskOutcome
 import spock.lang.Unroll
 
-class TerraformPluginTest extends DSSpecification {
+class TerraformPluginTest extends TemporaryFolderSpecification {
     def "I can apply the plugin"() {
         given:
         buildFile << """

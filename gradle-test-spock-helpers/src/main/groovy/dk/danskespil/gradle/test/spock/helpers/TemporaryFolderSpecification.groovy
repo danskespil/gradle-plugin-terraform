@@ -5,7 +5,7 @@ import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
-class DSSpecification extends Specification {
+class TemporaryFolderSpecification extends Specification {
     @Delegate
     static TestHelper testHelper
     @Rule

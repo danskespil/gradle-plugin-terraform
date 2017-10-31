@@ -1,11 +1,11 @@
 package dk.danskespil.gradle.task.helpers
 
-import dk.danskespil.gradle.test.spock.helpers.DSSpecification
+import dk.danskespil.gradle.test.spock.helpers.TemporaryFolderSpecification
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Unroll
 
-class CommandLineExecutorTest extends DSSpecification {
+class CommandLineExecutorTest extends TemporaryFolderSpecification {
     @Unroll
     def "As Custom Task I can use TestExecutor to fake execution of '#command' on the system I live on"() {
         given:

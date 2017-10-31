@@ -1,9 +1,9 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
-import dk.danskespil.gradle.test.spock.helpers.DSSpecification
+import dk.danskespil.gradle.test.spock.helpers.TemporaryFolderSpecification
 import org.gradle.testkit.runner.TaskOutcome
 
-class PlanOutputTest extends DSSpecification {
+class PlanOutputTest extends TemporaryFolderSpecification {
     def "plan task provided by plugin creates binary files as output by default"() {
         given:
         buildFile << """

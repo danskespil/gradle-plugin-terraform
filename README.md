@@ -2,7 +2,7 @@ Build Status master branch [![Build Status master branch](https://travis-ci.org/
 
 # What is this repository for? 
 
-This plugin helps us, at Danske Spil, to use Hashicorps ```terraform``` for production and test systems.
+This plugin helps us, at Danske Spil and Lund&Bendsen, to use Hashicorps ```terraform``` for production and test systems.
 When we started using terraform, we just used the cli. However, soon we found that there is a workflow when we use terraform.
 
 One usecase is, that we save the textual output from ```terraform plan``` in a file, and commit 

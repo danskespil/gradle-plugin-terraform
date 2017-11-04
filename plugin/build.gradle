@@ -52,15 +52,12 @@ gradlePlugin {
 
 repositories {
     jcenter()
-    mavenCentral()
-    maven {
-        url "https://dl.bintray.com/jwermuth/org.jwermuth"
-    }
+    maven { url "https://dl.bintray.com/jwermuth/oss" }
 }
 
 dependencies {
-    compile 'dk.danskespil.gradle.plugins:gradle-task-helpers:0.0.1'
-    testCompile 'dk.danskespil.gradle.plugins:gradle-plugin-test-spock-helpers:0.0.3'
+    compile 'dk.danskespil.gradle.plugins:gradle-task-helpers:0.0.2'
+    testCompile 'dk.danskespil.gradle.plugins:gradle-plugin-test-spock-helpers:0.0.17'
     testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
         exclude module: 'groovy-all'
     }

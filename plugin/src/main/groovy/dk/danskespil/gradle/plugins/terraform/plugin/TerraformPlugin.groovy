@@ -15,11 +15,6 @@ class TerraformPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.repositories {
-            maven {
-                url "https://dl.bintray.com/jwermuth/org.jwermuth"
-            }
-        }
         applyJavaPluginSoWeHaveCommonTasksSuchAsCleanAtHand(project)
 
         Get tfGet = project.task(type:Get, 'tfGet')

@@ -1,5 +1,6 @@
 Build Status master branch [![Build Status master branch](https://travis-ci.org/jwermuth/gradle-plugin-terraform.svg?branch=master)](https://travis-ci.org/jwermuth/gradle-plugin-terraform)
 
+** This repository is not fully operational yet. If you use the watch feature I will notify once its operational **
 # What is this repository for? 
 
 This plugin helps us, at Danske Spil and Lund&Bendsen, to use Hashicorps ```terraform``` for production and test systems.

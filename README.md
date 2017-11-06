@@ -53,6 +53,9 @@ this gives you a number of tasks, that represent a subset of terraforms cli comm
 * init (called tfInit)
 * get (called tfGet)
 
+and some tasks that are not terraform tasks
+* clean (called tfClean, removes output files from plan. If you do not want it, disable it with tfClean.enabled=false)
+
 you call them like this
 ```text
 ./gradlew tfPlan

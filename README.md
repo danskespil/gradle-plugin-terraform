@@ -1,5 +1,7 @@
 Build Status master branch [![Build Status master branch](https://travis-ci.org/jwermuth/gradle-plugin-terraform.svg?branch=master)](https://travis-ci.org/jwermuth/gradle-plugin-terraform)
 
+[Versions](https://plugins.gradle.org/plugin/dk.danskespil.gradle.plugins.terraform) on Gradle Plugin Portal
+
 ** This repository is not fully operational yet. If you use the watch feature I will notify once its operational **
 # What is this repository for? 
 

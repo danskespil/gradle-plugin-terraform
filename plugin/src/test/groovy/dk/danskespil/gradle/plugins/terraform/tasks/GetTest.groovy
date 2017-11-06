@@ -41,7 +41,7 @@ class GetTest extends BaseSpecification {
         def build2 = buildWithTasks('cut')
 
         when:
-        fileInTemporaryFolder("/.terraform/modules").deleteDir()
+        findPathInTemporaryFolder("/.terraform/modules").deleteDir()
         def build3 = buildWithTasks('cut')
 
         then:

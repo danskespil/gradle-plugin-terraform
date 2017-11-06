@@ -56,8 +56,8 @@ repositories {
 }
 
 dependencies {
-    compile 'dk.danskespil.gradle.plugins:gradle-task-helpers:0.0.2'
-    testCompile 'dk.danskespil.gradle.plugins:gradle-plugin-test-spock-helpers:0.0.18'
+    compile 'dk.danskespil.gradle.plugins:gradle-task-helpers:0.0.3'
+    testCompile 'dk.danskespil.gradle.plugins:gradle-plugin-test-spock-helpers:0.1.2'
     testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
         exclude module: 'groovy-all'
     }

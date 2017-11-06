@@ -44,7 +44,7 @@ class MultiProjectTest extends BaseSpecification {
     }
 
     private void createSubProjectAndApplyPluginThere(String subProjectName) {
-        fileInTemporaryFolder('settings.gradle') << "include '${subProjectName}'" << "${String.format("%n")}"
+        findPathInTemporaryFolder('settings.gradle') << "include '${subProjectName}'" << "${String.format("%n")}"
         createPathInTemporaryFolder("${subProjectName}/build.gradle") << "apply plugin:'dk.danskespil.gradle.plugins.terraform'"
     }
 }

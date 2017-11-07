@@ -1,5 +1,5 @@
 [![Build Status master branch](https://travis-ci.org/jwermuth/gradle-plugin-terraform.svg?branch=master)](https://travis-ci.org/jwermuth/gradle-plugin-terraform)
-[![Latest version](https://img.shields.io/badge/version-latest-green.svg)](https://plugins.gradle.org/plugin/dk.danskespil.gradle.plugins.terraform)
+[![Latest version](https://img.shields.io/badge/Download-latest-green.svg)](https://plugins.gradle.org/plugin/dk.danskespil.gradle.plugins.terraform)
 
 # What is this repository for
 This plugin provides a workflow, when using Hashicorps ```terraform```

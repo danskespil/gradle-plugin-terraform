@@ -36,7 +36,6 @@ class TerraformPlugin implements Plugin<Project> {
         Apply tfApply = project.task(type: Apply, 'tfApply') {
             inputs.files tfPlan.outputs.files
         }
-        project.tasks.findByName('build').dependsOn tfApply
 
         cleanAlsoCleansFilesCreatedByTerraform(project)
     }

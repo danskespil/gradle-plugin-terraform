@@ -1,7 +1,9 @@
 package dk.danskespil.gradle.plugins.terraform.plugin
 
 import dk.danskespil.gradle.plugins.helpers.BaseSpecification
+import dk.danskespil.gradle.plugins.terraform.tasks.Apply
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Unroll
 
@@ -28,5 +30,26 @@ class DependenciesTest extends BaseSpecification {
         'tfGet'      | 'tfInit'     | 'resources are fetched externally before looking for modules'
         'clean'      | 'tfClean'    | 'the plugin provides a lifecycle similar to java lifecycle'
         'build'      | 'tfPlan'     | 'the plugin provides a lifecycle similar to java lifecycle'
+    }
+
+    def "it should not be possible to depend on tfApply by mistake. Its too dangerous"() {
+        given:
+        Project project = ProjectBuilder.builder()
+                .withProjectDir(testProjectDir.root)
+                .build()
+
+        when:
+        project.plugins.apply(TerraformPlugin)
+        Apply tfApply = project.tasks.findByName('tfApply')
+        Set<Task> tasks = new HashSet<Task>()
+
+        project.tasks.each { task ->
+            if (task.name != 'tfApply') {
+                tasks.addAll(task.dependsOn)
+            }
+        }
+
+        then:
+        !tasks.contains(tfApply)
     }
 }

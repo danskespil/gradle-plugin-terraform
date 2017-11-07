@@ -52,7 +52,6 @@ gradlePlugin {
 
 repositories {
     jcenter()
-    maven { url "https://dl.bintray.com/jwermuth/oss" }
 }
 
 dependencies {

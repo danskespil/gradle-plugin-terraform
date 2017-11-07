@@ -127,6 +127,12 @@ Join the party - write a test, code the functionality.
 * Jesper Wermuth wermuth@lundogbendsen.dk
  
 # Versions
+## 0.0.9
+* added test with multi project usage example
+* updated to latest deps
+
+...
+
 ## 0.0.5
 * Internal refactoring
 

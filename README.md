@@ -42,7 +42,7 @@ but remember that the source code is _always_ the truth. These words are merely 
 This is how you include and apply the plugin
 ```text
 plugins {
-  id "dk.danskespil.gradle.plugins.terraform" version "0.0.4"
+  id "dk.danskespil.gradle.plugins.terraform" version "0.0.8"
 }
 ```
 this gives you a number of tasks, that represent a subset of terraforms cli commands, e.g.
@@ -53,7 +53,7 @@ this gives you a number of tasks, that represent a subset of terraforms cli comm
 * get (called tfGet)
 
 and some tasks that are not terraform tasks
-* clean (called tfClean, removes output files from plan. If you do not want it, disable it with tfClean.enabled=false)
+* tfClean (tfClean task is executed with you execute clean task. It cleans the output files created by tfPlan. If you do not want it, disable it with tfClean.enabled=false)
 
 you call them like this
 ```text
@@ -71,22 +71,6 @@ infrastructures.
 When applying the plugin itself, you get a configured version of the tasks that works in a reasonable way.
 e.g. tfPlan writes textual output to plan-output by default, and the binary plan to plan-output.bin by default.
 
-You can create custom version of the tasks like so
-```text
-task myPlan(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
-    out=file('my-better-bin-name.bin'
-    outAsText=file('my-better-text-name.text'
-}
-```
-if you want to, but if you just want a workflow that works as our default, use the tasks 
-provided by the plugin. They have been configured for you. If you create custom tasks you
-have to configure them yourself.
-
-## Examples
-By simply applying the plugin, you can call tfPlan and expect that plan is called after all required
-initialization has been performed. This requires that you have a working terraform setup, e.g. that you
-are able to perform the terraform cli steps manually.
-
 However, since the plugin can not know where you have put your modules, you have to tell it. 
 You do that as done in the example below, assuming your module files are at the gradle root dir in directory 
 _modules_
@@ -100,8 +84,25 @@ tfGet {
 }
 ```
 
+You can create custom version of the tasks like so
+```text
+task myPlan(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
+    out=file('my-better-bin-name.bin'
+    outAsText=file('my-better-text-name.text'
+}
+```
+if you want to, but if you just want a workflow that works as our default, use the tasks 
+provided by the plugin. They have been configured for you. If you create custom tasks you
+have to configure them yourself. Remember you can consult the tests in the code, to see how stuff works
+
+## Examples
+After applying the plugin, you can call tfPlan and expect that plan is called after all required
+initialization has been performed. This requires that you have a working terraform setup, e.g. that you
+are able to perform the terraform cli steps manually.
+
 # How do I contribute
 Join the party - write a test, code the functionality.
+
 ## How do I get set up? 
 
 * Build the code : ```./gradlew clean build```

@@ -4,8 +4,11 @@
 ** This repository is not fully operational yet. If you use the watch feature I will notify once its operational **
 # What is this repository for? 
 
-This plugin helps us, at Danske Spil and Lund&Bendsen, to use Hashicorps ```terraform``` for production and test systems.
+This plugin provides a workflow, when using Hashicorps ```terraform```
 When we started using terraform, we just used the cli. However, soon we found that there is a workflow when we use terraform.
+
+We are using it at [Danske Spil](https://danskespil.dk/) and [Lund&Bendsen](https://home.lundogbendsen.dk/), perhaps you
+can also benefit from it.
 
 One usecase is, that we save the textual output from ```terraform plan``` in a file, and commit 
 it to git before we do an apply (NB: git committing is not part of this plugin). 

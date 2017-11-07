@@ -35,17 +35,51 @@ remember to do the auditing we want, we codified it in this gradle plugin.
 This plugin is written for terraform 0.10.4. It will most likely work with 0.10.x versions, but 
 no guarantees are given. 
 
-## How do I use it
+## How do you set up gradle with the plugin
 
 Well. There are a number of tests in the repo you can read. Here is a brief overview, 
 but remember that the source code is _always_ the truth. These words are merely shadows on the wall.
 
-This is how you include and apply the plugin
+This is how you include and apply the plugin in a non multi project
 ```text
 plugins {
   id "dk.danskespil.gradle.plugins.terraform" version "0.0.8"
 }
 ```
+This is how you can do it in a multi project, where your terraform files are in a terraform subproject
+build.gradle
+```
+plugins {
+    id "dk.danskespil.gradle.plugins.terraform" version "0.0.8" apply false
+}
+
+configure(project(':terraform')) {
+    apply plugin: 'dk.danskespil.gradle.plugins.terraform'
+}
+```
+settings.gradle
+```
+include 'terraform'
+```
+This is how you can do it in a multi project, where your terraform files are in a multiple subprojects
+build.gradle
+```
+plugins {
+    id "dk.danskespil.gradle.plugins.terraform" version "0.0.8" apply false
+}
+
+configure(project(':terraforming').subprojects) {
+    apply plugin: 'dk.danskespil.gradle.plugins.terraform'
+}
+```
+settings.gradle
+```
+include 'terraforming:env-test'
+include 'terraforming:env-production'
+```
+
+## How do you use it
+
 this gives you a number of tasks, that represent a subset of terraforms cli commands, e.g.
 * plan (called tfPlan)
 * validate (called tfValidate)

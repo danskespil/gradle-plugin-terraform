@@ -1,10 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform.plugin
 
-import dk.danskespil.gradle.plugins.terraform.tasks.Apply
-import dk.danskespil.gradle.plugins.terraform.tasks.Get
-import dk.danskespil.gradle.plugins.terraform.tasks.Init
-import dk.danskespil.gradle.plugins.terraform.tasks.Plan
-import dk.danskespil.gradle.plugins.terraform.tasks.Validate
+import dk.danskespil.gradle.plugins.terraform.tasks.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -17,20 +13,30 @@ class TerraformPlugin implements Plugin<Project> {
     void apply(Project project) {
         applyJavaPluginSoWeHaveCommonTasksSuchAsCleanAtHand(project)
 
-        Get tfGet = project.task(type:Get, 'tfGet')
-        Init tfInit = project.task(type:Init, 'tfInit')
-        Validate tfValidate = project.task(type:Validate, 'tfValidate')
+        Get tfGet = project.task(type: Get, 'tfGet')
+        Init tfInit = project.task(type: Init, 'tfInit')
 
-        Plan tfPlan = project.task(type:Plan, 'tfPlan', dependsOn: tfValidate) {
+        // get does not work without have access to remote resources
+        tfGet.dependsOn tfInit
+
+        Validate tfValidate = project.task(type: Validate, 'tfValidate')
+        project.tasks.findByName('check').dependsOn tfValidate
+
+        // validate needs modules to work
+        tfValidate.dependsOn tfGet
+
+        Plan tfPlan = project.task(type: Plan, 'tfPlan', dependsOn: tfValidate) {
             inputs.files tfGet.outputs.files
             inputs.files tfInit.outputs.files
             out = project.file('plan-output.bin')
             outAsText = project.file('plan-output')
         }
+        project.tasks.findByName('build').dependsOn tfPlan
 
-        Apply tfApply = project.task(type:Apply, 'tfApply') {
+        Apply tfApply = project.task(type: Apply, 'tfApply') {
             inputs.files tfPlan.outputs.files
         }
+        project.tasks.findByName('build').dependsOn tfApply
 
         cleanAlsoCleansFilesCreatedByTerraform(project)
     }

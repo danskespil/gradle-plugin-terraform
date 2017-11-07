@@ -151,6 +151,7 @@ Join the party - write a test, code the functionality.
   * ./gradlew clean release -Prelease.scope=patch -Prelease.stage=dev # e.g. fiddling with readme
 * Deployment
   * ./gradlew clean publishPlugins
+  * ./gradlew clean build release publishPlugins -Prelease.scope=patch -Prelease.stage=milestone
   
 
 ## Contribution guidelines 
@@ -165,7 +166,7 @@ Join the party - write a test, code the functionality.
 ## 0.0.9
 * added test with multi project usage example
 * updated to latest deps
-
+* added dependencies so build, clean, ... behaves like you would expect 
 ...
 
 ## 0.0.5

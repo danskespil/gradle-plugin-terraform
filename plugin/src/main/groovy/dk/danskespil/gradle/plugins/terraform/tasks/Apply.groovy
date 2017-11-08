@@ -13,11 +13,6 @@ class Apply extends TerraformBaseTask {
     @InputFile
     File plan
 
-    @Override
-    String getDescription() {
-        return """Wraps cli command: terraform apply"""
-    }
-
     @TaskAction
     action() {
         commandLine.addToEnd('terraform', 'apply')
@@ -29,5 +24,10 @@ class Apply extends TerraformBaseTask {
         executor.executeExecSpec(this, { ExecSpec e ->
             e.commandLine this.commandLine
         })
+    }
+
+    @Override
+    String getDescription() {
+        return """Wraps cli command: terraform apply"""
     }
 }

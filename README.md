@@ -1,4 +1,4 @@
-[![Build Status master branch](https://travis-ci.org/jwermuth/gradle-plugin-terraform.svg?branch=master)](https://travis-ci.org/jwermuth/gradle-plugin-terraform)
+[![Build Status master branch](https://travis-ci.org/danskespil/gradle-plugin-terraform.svg?branch=master)](https://travis-ci.org/danskespil/gradle-plugin-terraform)
 [![Latest version](https://img.shields.io/badge/Download-latest-green.svg)](https://plugins.gradle.org/plugin/dk.danskespil.gradle.plugins.terraform)
 
 # What is this repository for

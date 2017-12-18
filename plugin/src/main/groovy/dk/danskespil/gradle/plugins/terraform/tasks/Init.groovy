@@ -13,23 +13,13 @@ class Init extends TerraformBaseTask {
     action() {
         commandLine.addToEnd('terraform', 'init')
 
-        // Never run terraform init if a state file is present
-        if (aStateFileIsPresent()) {
-            return
-        }
-
         executor.executeExecSpec(this, { ExecSpec e ->
             e.commandLine this.commandLine
         })
-    }
-
-    private boolean aStateFileIsPresent() {
-        return project.file('.terraform/terraform.tfstate').exists()
     }
 
     @Override
     String getDescription() {
         return """Wraps terraform init. Will only execute if no .terraform/terraform.state file is present. Designed to initialize automatically in a fresh clone"""
     }
-
 }

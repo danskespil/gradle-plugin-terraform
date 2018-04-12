@@ -55,4 +55,44 @@ class ApplyTest extends BaseSpecification {
         build.output.contains('terraform apply plan.bin')
     }
 
+    def "When calling custom terraform apply task, you can configure auto approval"() {
+        given:
+        buildFile << """
+          plugins {
+            id 'dk.danskespil.gradle.plugins.terraform'
+
+          }
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Apply) {
+            autoApprove = true
+          }
+        """
+
+        when:
+        def build = buildWithTasks(':cut')
+
+        then:
+        build.output.contains('terraform apply -auto-approve')
+    }
+
+    def "When calling custom terraform apply task, you can configure auto approval and set plan in correct order"() {
+        given:
+        buildFile << """
+          plugins {
+            id 'dk.danskespil.gradle.plugins.terraform'
+
+          }
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Apply) {
+            autoApprove = true
+            plan = file('plan.bin')
+          }
+        """
+        createPathInTemporaryFolder('plan.bin') << "binary-content"
+
+        when:
+        def build = buildWithTasks(':cut')
+
+        then:
+        build.output.contains('terraform apply -auto-approve plan.bin')
+    }
+
 }

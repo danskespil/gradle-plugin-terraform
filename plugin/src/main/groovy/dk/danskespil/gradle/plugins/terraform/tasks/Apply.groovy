@@ -1,5 +1,6 @@
 package dk.danskespil.gradle.plugins.terraform.tasks
 
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
@@ -13,9 +14,17 @@ class Apply extends TerraformBaseTask {
     @InputFile
     File plan
 
+    @Optional
+    @Input
+    boolean autoApprove = false
+
     @TaskAction
     action() {
         commandLine.addToEnd('terraform', 'apply')
+
+        if (autoApprove) {
+            commandLine.addToEnd('-auto-approve')
+        }
 
         if (plan) {
             commandLine.addToEnd(plan.name)

@@ -151,6 +151,7 @@ Join the party - write a test, code the functionality.
   * ./gradlew clean release -Prelease.scope=patch -Prelease.stage=dev # e.g. fiddling with readme
 * Deployment
   * ./gradlew clean publishPlugins
+  * or
   * ./gradlew clean build release publishPlugins -Prelease.scope=patch -Prelease.stage=milestone
 
 
@@ -164,9 +165,15 @@ Join the party - write a test, code the functionality.
  
 # Versions
 ## Next version
+
+## 0.0.9
 * added test with multi project usage example
 * updated to latest deps
-* added dependencies so build, clean, ... behaves like you would expect 
+* added dependencies so build, clean, ... behaves like you would expect
+* added auto-apply feature by Joe Bradish
+
+## 0.0.6-0.0.8
+No comments provided.
 
 ## 0.0.5
 * Internal refactoring

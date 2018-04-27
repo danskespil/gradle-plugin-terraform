@@ -10,7 +10,7 @@ import org.gradle.process.ExecSpec
  * Wraps cli terraform validate
  */
 
-class Validate extends TerraformBaseTask {
+class Validate extends TerraformBaseTask implements TerraformVariables {
     // These inputfiles are the same for Validate and Plan
     @OutputFiles
     FileCollection oTerraformFiles = project.fileTree('.').include('*.tf').include('*.tpl')
@@ -20,9 +20,11 @@ class Validate extends TerraformBaseTask {
     @TaskAction
     action() {
         commandLine.addToEnd('terraform', 'validate')
+        addVariablesToEnd(commandLine)
 
         executor.executeExecSpec(this, { ExecSpec e ->
             e.commandLine this.commandLine
+            e.workingDir project.projectDir
         })
     }
 

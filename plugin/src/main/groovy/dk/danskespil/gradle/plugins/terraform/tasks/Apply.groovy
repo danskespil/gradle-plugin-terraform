@@ -32,6 +32,7 @@ class Apply extends TerraformBaseTask {
 
         executor.executeExecSpec(this, { ExecSpec e ->
             e.commandLine this.commandLine
+            e.workingDir project.projectDir
         })
     }
 

@@ -149,4 +149,95 @@ class PlanTest extends BaseSpecification {
         outputfile << ['plan-output.bin']
     }
 
+    def "Plan variables are included"() {
+        given:
+        buildFile << """
+          plugins {
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
+              var('domain', 'example.com')
+          }
+        """
+
+        when:
+        def build = buildWithTasks(':cut')
+
+        then:
+        build.output.contains('terraform plan -var domain=example.com')
+    }
+
+    def "Plan variable files are included"() {
+        given:
+        buildFile << """
+          plugins {
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
+              varfile file('common.tfvars')
+          }
+        """
+
+        when:
+        def build = buildWithTasks(':cut')
+
+        then:
+        build.output.find(/terraform plan -var-file=.*\/common\.tfvars/)
+    }
+
+    def "Plan variable file change causes task to run again"() {
+        given:
+        File simulatedVariableFile = createPathInTemporaryFolder('vars.tfvars')
+        simulatedVariableFile << "domain = example.com"
+
+        buildFile << """
+          plugins {
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
+              varfile file("${simulatedVariableFile}")
+          }
+        """
+
+        when:
+        def build1 = buildWithTasks('cut')
+
+        def build2 = buildWithTasks('cut')
+        simulatedVariableFile << "email = dev@example.com"
+
+        def build3 = buildWithTasks('cut')
+
+        def build4 = buildWithTasks('cut')
+
+        then:
+        build1.task(':cut').outcome == TaskOutcome.SUCCESS
+        build2.task(':cut').outcome == TaskOutcome.UP_TO_DATE
+        build3.task(':cut').outcome == TaskOutcome.SUCCESS
+        build4.task(':cut').outcome == TaskOutcome.UP_TO_DATE
+    }
+
+    def "Plan variable files and independent variables are included"() {
+        given:
+        buildFile << """
+          plugins {
+              id 'dk.danskespil.gradle.plugins.terraform'
+          }
+
+          task cut(type: dk.danskespil.gradle.plugins.terraform.tasks.Plan) {
+              varfile file('common.tfvars')
+              varfile file('dev.tfvars')
+              var('domain', 'example.com')
+              var('email', 'dev@example.com')
+          }
+        """
+
+        when:
+        def build = buildWithTasks(':cut')
+
+        then:
+        build.output.find(/terraform plan -var-file=.*?\/common\.tfvars -var-file=.*?\/dev\.tfvars -var domain=example.com -var email=dev@example.com/)
+    }
 }

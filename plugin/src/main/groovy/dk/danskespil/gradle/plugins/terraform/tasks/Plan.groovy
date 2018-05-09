@@ -8,7 +8,7 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecSpec
 
-class Plan extends TerraformBaseTask
+class Plan extends TerraformBaseTask implements TerraformVariables
 {
     // These inputfiles are the same for Validate and Plan
     @InputFiles
@@ -29,7 +29,7 @@ class Plan extends TerraformBaseTask
     @TaskAction
     action() {
         commandLine.addToEnd('terraform', 'plan')
-
+        addVariablesToEnd(commandLine)
         if (out) {
             commandLine.addToEnd("-out=${out.name}")
         }
@@ -42,6 +42,7 @@ class Plan extends TerraformBaseTask
         echoOutputHereToo.withStream { os ->
             executor.executeExecSpec(this, { ExecSpec e ->
                 e.commandLine this.commandLine
+                e.workingDir project.projectDir
                 e.standardOutput = os
             })
         }

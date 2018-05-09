@@ -164,8 +164,10 @@ Join the party - write a test, code the functionality.
 * Jesper Wermuth wermuth@lundogbendsen.dk
  
 # Versions
-## Next version
+## Next release
 
+## 0.1.0
+* Handles var files and vars
 ## 0.0.9
 * added test with multi project usage example
 * updated to latest deps
